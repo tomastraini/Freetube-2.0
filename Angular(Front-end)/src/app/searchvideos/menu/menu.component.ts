@@ -23,9 +23,7 @@ export class MenuComponent implements OnInit {
         this.reload();
         sessionStorage.removeItem("reload");
       }, 1000);
-
     }
-
   }
 
 
@@ -69,12 +67,19 @@ export class MenuComponent implements OnInit {
         if(res){ 
           this.videosOriginal = res;
           this.videos = res;
+          // make a foreach
+          this.videosOriginal.forEach(function(value: any){
+            if (value.description == null) {
+              value.description = "";
+            }
+          })
+
           this.videos = this.videos.slice(0, 6);
           this.length = this.videos.length;
           this.descriptionLength = this.videos.length;
-          
         }
     })
+    
 
   }
 
@@ -88,6 +93,7 @@ export class MenuComponent implements OnInit {
     this.videos = this.videosOriginal;
     this.videos = this.videos.slice(startIndex, endIndex);
   }
+  
   onResize(event: any) { //to adjust to screen size
     this.breakpoint = (event.target.innerWidth <= 400) ? 1 : 6;
   }

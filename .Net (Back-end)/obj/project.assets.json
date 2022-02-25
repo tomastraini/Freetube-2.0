@@ -9031,19 +9031,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\locos\\.nuget\\packages\\": {}
+    "C:\\Users\\Tomi\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Proyectos desarrollo\\Freetube v2\\.Net (Back-end)\\REST.csproj",
+      "projectUniqueName": "C:\\Users\\Tomi\\Documents\\Freetube-2.0\\.Net (Back-end)\\REST.csproj",
       "projectName": "REST",
-      "projectPath": "D:\\Proyectos desarrollo\\Freetube v2\\.Net (Back-end)\\REST.csproj",
-      "packagesPath": "C:\\Users\\locos\\.nuget\\packages\\",
-      "outputPath": "D:\\Proyectos desarrollo\\Freetube v2\\.Net (Back-end)\\obj\\",
+      "projectPath": "C:\\Users\\Tomi\\Documents\\Freetube-2.0\\.Net (Back-end)\\REST.csproj",
+      "packagesPath": "C:\\Users\\Tomi\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Tomi\\Documents\\Freetube-2.0\\.Net (Back-end)\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\locos\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Tomi\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -9122,7 +9122,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.100\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.200\\RuntimeIdentifierGraph.json"
       }
     }
   }

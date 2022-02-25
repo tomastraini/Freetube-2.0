@@ -1,8 +1,17 @@
-<video src="https://localhost:44375/api/videos/watch/?id={{ id }}" controls></video>
-<h1 class="title" maxlength="25">{{ video.title }}</h1>
+<div class="videoContainerforView" id="videoContainerforView">
+    <video id="videoViewer"
+    class="videoViewer"  src="https://localhost:44375/api/videos/watch/?id={{ id }}" 
+    controls>
+    </video>
+</div>
 
-<hr class="description-div">
+<div *ngIf="video !== undefined ">
+    <h1 class="title" maxlength="25">{{ video.title }}</h1>
 
-<p class="description">
-    {{ video.description }}
-</p>
+
+    <hr class="description-div">
+
+    <p class="description">
+        {{ video.description }}
+    </p>
+</div>

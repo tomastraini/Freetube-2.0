@@ -13,7 +13,7 @@ import { VideoWatchComponent } from './searchvideos/video-watch/video-watch.comp
 import { TableFilterPipe } from './mypipe';
 import { SearchvideosComponent } from './searchvideos/searchvideos.component';
 import { MatPaginator, MatPaginatorModule, PageEvent } from '@angular/material/paginator';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
+import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations'; 
 
 @NgModule({
   declarations: [
@@ -27,7 +27,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule,
     MatPaginatorModule,
     HttpClientModule,
     FormsModule,

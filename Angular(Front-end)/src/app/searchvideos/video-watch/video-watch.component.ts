@@ -13,20 +13,21 @@ export class VideoWatchComponent implements OnInit {
   { 
 
   }
-  // https://localhost:44375/api/Videos/1
   id: any
   video: any;
-
+  src: any;
+  
   ngOnInit(): void 
   {
-     this.id = this.router.url.split('/')[2];
-
-    var newRoute = 'https://localhost:44375/api/videos/' + this.id;
-    this.http.get(newRoute)
-      .subscribe(res => {
-        if(res){ 
-          this.video = res;
-        }
-    });
+      this.id = this.router.url.split('/')[2];
+      var newRoute = 'https://localhost:44375/api/videos/' + this.id;
+      this.http.get(newRoute)
+        .subscribe(res => {
+          if(res){ 
+            this.video = res;
+          }
+      });
   }
+
+
 }
