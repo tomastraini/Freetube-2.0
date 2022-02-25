@@ -1,0 +1,30 @@
+
+<mat-grid-list cols="3" rowHeight="1.5:1"  (window:resize)="onResize($event)">
+  <mat-grid-tile *ngFor="let video of videos | tableFilter: busquedavalue">
+    <div class="bg-dark" (click)="openVid(video)">
+      <h3 class="header" class="text-light text-center" style="text-decoration: none">{{ video.title }}</h3>
+
+      <video height="200" width="400" class="ml-2" src="https://localhost:44375/api/videos/watch/?id={{ video.id_video }}"></video>
+      <p  class="text-light text-right ml-5" 
+      *ngIf="descriptionLength === 0">
+        {{ video.description?.slice(0,50) }}...
+      </p>
+      <p  class="text-light text-right ml-5"
+      *ngIf="descriptionLength < 20">
+
+      {{ video.description?.slice(0,50) }}
+      </p>
+      <p  class="text-light text-right ml-5" 
+      *ngIf="descriptionLength > 20">
+        {{ video.description?.slice(0,50) }}...
+      </p>
+      
+
+    </div>
+  </mat-grid-tile>
+</mat-grid-list>
+
+<mat-paginator [length]="length"
+[pageSize]="pageSize"
+(page)="OnPageChange($event)" style-paginator showFirstLastButtons  >
+</mat-paginator>

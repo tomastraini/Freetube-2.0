@@ -1,0 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;700&display=swap');
+
+video
+{
+    background-color: black;
+    position: relative;
+    margin-left: 5%;
+    margin-right: auto;
+    margin-top: 2.5%;
+    max-width: 600px;
+    max-height: 337.5px;
+    border: 1px solid black;
+    border-radius: 5px;
+    
+}
+.title
+{
+    font-family: 'Open Sans', sans-serif;
+    text-align: left;
+    margin-left: 5%;
+}
+
+.description
+{
+    font-family: 'Open Sans', sans-serif;
+    text-align: left;
+    margin-left: 5%;
+}
+.description-div
+{
+    margin-left: 5%;
+    margin-right: 51%;
+}
