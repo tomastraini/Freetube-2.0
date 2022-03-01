@@ -47,9 +47,9 @@ namespace REST.Servicios.Interfaces
             }
         }
         //xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-        public users ChangePassword(int id, string pass)
+        public users ChangePassword(int id, string oldpass, string newpass)
         {
-            return repo.ChangePassword(id, pass);
+            return repo.ChangePassword(id, oldpass, newpass);
         }
 
         public List<UsersDTO> GetUsers()
@@ -124,6 +124,16 @@ namespace REST.Servicios.Interfaces
                 }
             }
 
+        }
+
+        public UsersDTO GetUserById(string id)
+        {
+            return repo.GetUserById(id);
+        }
+
+        public users Login(UsersDTO users)
+        {
+            return repo.Login(users);
         }
     }
 }

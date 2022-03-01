@@ -24,7 +24,7 @@ nav
 {
     // make this search bar centered 
     margin-left: auto;
-    margin-right: 25%;
+    margin-right: auto;
     width: 50%;
     height: 50px;
     padding-left: 25px;
@@ -38,6 +38,7 @@ nav
     {
         border: 1px solid #00bcd4;
     }
+    // in mobile move the navbar to the top
 
 
 }
@@ -69,17 +70,36 @@ nav
 
 .signIn 
 {
-    // make the button appear on the right side of the screen
-    position: absolute;
-    right: 75px;
-    top: 20px;
-    height: 40px;
+    @media (max-width: 767px)
+    {
+        margin-right: 50px;
+    }
+    // PC
+    @media (min-width: 767px)
+    {
+        margin-right: 10px;
+    }
 }
 
-.signOut
+.Register
 {
-    position: absolute;
-    right: 250px;
-    top: 20px;
-    height: 40px;
+
+}
+
+.SignOut
+{
+    
+}
+
+.Upload
+{
+    @media (max-width: 767px)
+    {
+        margin-right: 50px;
+    }
+    // PC
+    @media (min-width: 767px)
+    {
+        margin-right: 10px;
+    }
 }

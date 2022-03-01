@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -19,6 +20,18 @@ namespace REST.Authentication
         }
         public string Authentication(string username, string password, List<users> userCredential)
         {
+            using (SHA256 sha256Hash = SHA256.Create())
+            {
+                byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(password));
+
+                StringBuilder stringbuilder = new StringBuilder();
+                for (int i = 0; i < bytes.Length; i++)
+                {
+                    stringbuilder.Append(bytes[i].ToString("x2"));
+                }
+                password = stringbuilder.ToString();
+            }
+
             if (!(userCredential.Select(x => x.usern).Contains(username)) ||
                 !(userCredential.Select(x => x.passwordu).Contains(password)))
             {

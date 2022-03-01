@@ -47,7 +47,7 @@ export class AppComponent {
     }
     else
     {
-      this.http.post('https://localhost:44375/api/Authentication/authentication', {
+      this.http.post('https://localhost:44375/api/Users/login?username=admin&password=123', {
             name: sessionStorage.getItem('x'),
             password: sessionStorage.getItem('y')
           }, {observe: 'response', responseType: 'text'})

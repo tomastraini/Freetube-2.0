@@ -38,7 +38,6 @@ export class MenuComponent implements OnInit {
   videoElement: any;
   mover = 0;
   @Input() busquedavalue: any;
-  descriptionLength: any;
 
   reload(): void
   {
@@ -47,13 +46,11 @@ export class MenuComponent implements OnInit {
     this.router.navigate([actualroute]);
   });
   }
-  // after view init event
 
   ngOnInit(): void
   {
     if (this.router.url.includes('/search'))
     {
-      // split url to get search value
       const searchvalue = this.router.url.split('/')[2];
       this.busquedavalue = searchvalue;
     }
@@ -72,34 +69,36 @@ export class MenuComponent implements OnInit {
         {
           this.videosOriginal = Response;
           this.videos = Response;
+          console.log(this.videos);
+          
           this.videosOriginal.forEach(function(value: any){
-            if (value.description == null) {
+            if (value.description == null)
+            {
               value.description = '';
             }
+            value.descriptionLength = value.description != null ? value.description.length : 0;
+
             value.linksrc = 'https://localhost:44375/api/videos/watch/?id=' + value.id_video ;
           });
         });
   }
 
-  OnPageChange(event: PageEvent){
-    let startIndex = event.pageIndex * event.pageSize;
+  OnPageChange(event: PageEvent): void{
+    const startIndex = event.pageIndex * event.pageSize;
     let endIndex = startIndex + event.pageSize + 3;
-    
-    if(endIndex > this.length){
+    if (endIndex > this.length){
       endIndex = this.length;
     }
     this.videos = this.videosOriginal;
     this.videos = this.videos.slice(startIndex, endIndex);
   }
-  
-  onResize(event: any) { //to adjust to screen size
+  onResize(event: any): void
+  {
     this.breakpoint = (event.target.innerWidth <= 400) ? 1 : 6;
   }
 
-  openVid(video: any)
+  openVid(video: any): void
   {
-    // go to /watch page with video
     window.location.href = '/watch/' + video.id_video;
   }
-
 }

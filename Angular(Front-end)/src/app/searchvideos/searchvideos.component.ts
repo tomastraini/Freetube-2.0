@@ -89,8 +89,9 @@ export class SearchvideosComponent implements OnInit {
             Authorization: 'Bearer ' + sessionStorage.getItem('token'),
         })
       };
+      const username = sessionStorage.getItem('m');
       this.http.post('https://localhost:44375/api/Videos?title=' + data.selectitle
-      + '&description=' + data.selectDesc + '&id_user=1', formData, httpOptions).subscribe(
+      + '&description=' + data.selectDesc + '&id_user=' + username, formData, httpOptions).subscribe(
         (Response) => {
           window.location.reload();
         },
@@ -108,5 +109,11 @@ export class SearchvideosComponent implements OnInit {
   register(): void
   {
     this.router.navigate(['/register']);
+  }
+  logout(): void
+  {
+    sessionStorage.setItem('x', 'user');
+    sessionStorage.setItem('y', '123');
+    window.location.reload();
   }
 }

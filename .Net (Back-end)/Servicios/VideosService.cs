@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using REST.Contexts;
 using REST.Controladores;
+using REST.DTOs;
 using REST.Models;
 using REST.Repositories.Interfaces;
 using REST.Servicios.Interfaces;
@@ -52,11 +53,9 @@ namespace REST.Servicios
         }
         //xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
-        public List<videos> ListVideos()
+        public List<videosDTO> ListVideos()
         {
-            var response = repo.ListVideos();
-
-            return response;
+            return repo.ListVideos();
         }
 
         public videos OnPostUploadAsync(IFormFile files, string title, string description, int id_user, string filePath)

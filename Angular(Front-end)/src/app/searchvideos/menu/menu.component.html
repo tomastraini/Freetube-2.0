@@ -8,16 +8,16 @@
       [attr.src]="video.linksrc | secure | async">
     </video>
       <p  class="text-light text-right ml-5" 
-      *ngIf="descriptionLength === 0">
+      *ngIf="video.descriptionLength === 0">
         {{ video.description?.slice(0,50) }}...
       </p>
       <p  class="text-light text-right ml-5"
-      *ngIf="descriptionLength < 20">
+      *ngIf="video.descriptionLength < 20">
 
       {{ video.description?.slice(0,50) }}
       </p>
       <p  class="text-light text-right ml-5" 
-      *ngIf="descriptionLength > 20">
+      *ngIf="video.descriptionLength > 20">
         {{ video.description?.slice(0,50) }}...
       </p>
       

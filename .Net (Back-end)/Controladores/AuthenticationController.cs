@@ -31,6 +31,7 @@ namespace REST.Controladores
         public IActionResult Authentication([FromBody] Member userCredential)
         {
             var users = (from us in ctx.users select us).ToList();
+            
 
             var token = jwtAuth.Authentication(userCredential.Name, userCredential.Password, users);
             

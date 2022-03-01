@@ -9,7 +9,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class VideoWatchComponent implements OnInit {
 
-  constructor(public route: ActivatedRoute, private http: HttpClient, public router: Router) 
+  constructor(public route: ActivatedRoute, private http: HttpClient, public router: Router)
   {}
   id: any;
   video: any;

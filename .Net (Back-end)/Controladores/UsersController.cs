@@ -62,20 +62,23 @@ namespace REST.Controladores
         {
             return Ok(service.GetUsers());
         }
+
+        [HttpGet("{id}")]
+        public ActionResult GetUsers(string id)
+        {
+            return Ok(service.GetUserById(id));
+        }
         [HttpPost]
-        
         public ActionResult Register(IFormFile files, string username, string password, string correo,
             string nombreyapellido, string telefono)
         {
             service.Register(username, password, correo, nombreyapellido, telefono, files, _targetFilePath);
             return Ok();
         }
-
-
         [HttpPatch]
-        public ActionResult ChangePassword(int id_user, string pass)
+        public ActionResult ChangePassword(int id_user, string oldpass, string newpass)
         {
-            return Ok(service.ChangePassword(id_user, pass));
+            return Ok(service.ChangePassword(id_user, oldpass, newpass));
         }
 
         [HttpPatch("Image")]
@@ -83,6 +86,14 @@ namespace REST.Controladores
         {
             service.ChangeImage(id_user, files, _targetFilePath);
             return Ok();
+        }
+
+        [HttpPost("login")]
+        public ActionResult Login([FromBody] UsersDTO users)
+        {
+            if(users.usern == null || users.usern == "" ||
+            users.passwordu == null || users.passwordu == "") { return null; }
+            return Ok(service.Login(users));
         }
     }
 }

@@ -27,17 +27,28 @@
         <button class="btn btn-outline-danger" type="submit">Buscar</button>
         
     </form>
-    <button class="signIn btn btn-danger" (click)="login()"> 
+
+    <! –– Vista de usuario sin iniciar sesión ––>
+
+    <button class="signIn btn btn-danger" (click)="login()" *ngIf="loggedIn == false"> 
         <i class="fa fa-sign-in" aria-hidden="true"></i> Iniciar sesión
     </button>
 
-    <button class="signOut btn btn-danger" (click)="register()"> 
+    <button class="Register btn btn-danger" (click)="register()" *ngIf="loggedIn == false"> 
         <i class="fa fa-user-plus" aria-hidden="true"></i> Registrarse
     </button>
-    
-    <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#subirVideoModal"> 
-        <i class="fa fa-upload" aria-hidden="true"></i> 
+
+    <button class="Upload btn btn-danger" data-bs-toggle="modal" data-bs-target="#subirVideoModal"  *ngIf="loggedIn == true"> 
+        <i class="fa fa-upload" aria-hidden="true"></i> Subir video
     </button>
+
+    <button class="SignOut btn btn-danger" data-bs-toggle="modal"  *ngIf="loggedIn == true" (click)="logout()"> 
+        <i class="fa fa-sign-out" aria-hidden="true"></i> Cerrar sesión
+    </button>
+    
+    
+
+    
     
     </div>
 </div>
