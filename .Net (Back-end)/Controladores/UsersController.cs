@@ -11,7 +11,6 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace REST.Controladores
 {
@@ -65,9 +64,10 @@ namespace REST.Controladores
         }
         [HttpPost]
         
-        public ActionResult Register(IFormFile files, string username, string password)
+        public ActionResult Register(IFormFile files, string username, string password, string correo,
+            string nombreyapellido, string telefono)
         {
-            service.Register(username, password, files, _targetFilePath);
+            service.Register(username, password, correo, nombreyapellido, telefono, files, _targetFilePath);
             return Ok();
         }
 
@@ -76,6 +76,13 @@ namespace REST.Controladores
         public ActionResult ChangePassword(int id_user, string pass)
         {
             return Ok(service.ChangePassword(id_user, pass));
+        }
+
+        [HttpPatch("Image")]
+        public ActionResult ChangeImage(int id_user, IFormFile files)
+        {
+            service.ChangeImage(id_user, files, _targetFilePath);
+            return Ok();
         }
     }
 }

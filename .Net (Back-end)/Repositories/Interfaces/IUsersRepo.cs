@@ -9,8 +9,11 @@ namespace REST.Repositories.Interfaces
 {
     public interface IUsersRepo
     {
-        public List<users> GetUsers();
+        public List<UsersDTO> GetUsers();
         public users ChangePassword(int id, string pass);
-        public users Register(string username, string password, string finalfpath);
+        public  users Register(string username, string password
+            , string correo,
+            string nombreyapellido, string telefono, string finalfpath);
+        public string ChangeImage(int id_user, string filePath);
     }
 }

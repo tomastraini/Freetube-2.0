@@ -59,7 +59,7 @@ namespace REST.Servicios
             return response;
         }
 
-        public videos OnPostUploadAsync(IFormFile files, string title, string description, string filePath)
+        public videos OnPostUploadAsync(IFormFile files, string title, string description, int id_user, string filePath)
         {
             var ext = Path.GetExtension(files.FileName);
             filePath = Path.Combine(filePath,
@@ -74,7 +74,7 @@ namespace REST.Servicios
                     try
                     {
                         files.CopyTo(stream);
-                        return repo.UploadBD(title, description, finalfilepath);
+                        return repo.UploadBD(title, description, finalfilepath, id_user);
                     }
                     catch (Exception e) {
                         e.InnerException.ToString();

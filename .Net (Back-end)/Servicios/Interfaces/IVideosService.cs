@@ -13,7 +13,7 @@ namespace REST.Servicios.Interfaces
     {
         List<videos> ListVideos();
 
-        videos OnPostUploadAsync(IFormFile files, string title, string description, string path);
+        videos OnPostUploadAsync(IFormFile files, string title, string description, int id_user, string path);
 
         videos ModifyVideo(videos videos);
 

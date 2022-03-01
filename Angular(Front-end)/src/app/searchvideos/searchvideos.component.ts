@@ -14,54 +14,54 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 export class SearchvideosComponent implements OnInit {
 
   constructor(public route: ActivatedRoute, public router: Router, private http: HttpClient)
-  { 
-    
-  }
+  {}
 
   title = 'Angular';
   url: any;
   format: any;
   filename: any;
   url2: any;
-  errorformat: boolean = false;
+  errorformat = false;
   video: any;
   busquedavalue: any;
 
-  mensajerror: any
+  mensajerror: any;
   sub: any;
   id: any;
   view = '';
 
-  ngOnInit(): void 
+  loggedIn = false;
+
+  ngOnInit(): void
   {
-    if(this.router.url.includes('/watch'))
+    const user = sessionStorage.getItem('x');
+    const password = sessionStorage.getItem('y');
+    this.loggedIn = user !== 'user' && password !== '123';
+
+
+    if (this.router.url.includes('/watch'))
     {
       this.view = 'watch';
 
       this.id = this.router.url.split('/')[2];
     }
-    if(this.router.url.includes('/search'))
+    if (this.router.url.includes('/search'))
     {
       this.view = 'search';
     }
-    
-  
   }
 
-  // make a function to reload component with router
-  reload()
+  reload(): void
   {
-    var actualroute = this.router.url;
-    // get actual component and reload it
+    const actualroute = this.router.url;
     this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
       this.router.navigate([actualroute]);
     });
   }
 
-  buscar(event: any)
+  buscar(event: any): void
   {
-    console.log(event);
-    if(!this.router.url.includes('?search='))
+    if (!this.router.url.includes('?search=') && event !== undefined && event !== null && event !== '')
     {
       this.router.navigate(['/search/' + event]);
       setTimeout(() =>
@@ -71,39 +71,42 @@ export class SearchvideosComponent implements OnInit {
     }
   }
 
-  onSelectFile(event: any) {
-    //get the file
+  onSelectFile(event: any): void {
     this.url = event.target.files[0];
-    console.log(this.url);
-
   }
 
-
-    
-  onSubmitVid(data: any){
-    
-    
-    if(data.selectitle == ""){
+  onSubmitVid(data: any): void
+  {
+    if (data.selectitle === ''){
       this.errorformat = true;
-      this.mensajerror = "Rellenar título!"
+      this.mensajerror = 'Rellenar título!';
     }else{
       const formData = new FormData();
       formData.append('files', this.url);
 
       const httpOptions = {
-        headers: new HttpHeaders({ 
-          'Access-Control-Allow-Origin':'*',
-          'accept': '*/*'
+        headers: new HttpHeaders({
+            Authorization: 'Bearer ' + sessionStorage.getItem('token'),
         })
       };
-
-      
-      this.http.post('https://localhost:44375/api/Videos?title='+data.selectitle
-      +"&description="+data.selectDesc, formData, httpOptions).subscribe(
-        (data: any) => {
+      this.http.post('https://localhost:44375/api/Videos?title=' + data.selectitle
+      + '&description=' + data.selectDesc + '&id_user=1', formData, httpOptions).subscribe(
+        (Response) => {
           window.location.reload();
+        },
+        (error) => {
+          console.log(error);
         }
       );
     }
+  }
+  login(): void
+  {
+    this.router.navigate(['/login']);
+  }
+
+  register(): void
+  {
+    this.router.navigate(['/register']);
   }
 }

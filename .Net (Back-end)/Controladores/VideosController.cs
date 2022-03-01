@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using REST.Authentication;
 using REST.Contexts;
 using REST.Models;
 using REST.Servicios.Interfaces;
@@ -21,10 +23,13 @@ namespace REST.Controladores
 
         public readonly IVideosService videosService;
         public readonly ContextoGeneral contexto;
-        public VideosController(IConfiguration config, IVideosService videosService, ContextoGeneral contexto)
+
+        public VideosController(IConfiguration config, IVideosService videosService, 
+            ContextoGeneral contexto)
         {
             this.contexto = contexto;
             this.videosService = videosService;
+
 
             filepath = config.GetSection("StoredFilesPath").Value.ToString();
 
@@ -58,7 +63,6 @@ namespace REST.Controladores
                 }   
             }
         }
-
         [HttpGet]
         public ActionResult ListVideos()
         {
@@ -72,10 +76,10 @@ namespace REST.Controladores
         }
 
         [HttpPost]
-        public ActionResult OnPostUpload(IFormFile files, string title, string description)
+        public ActionResult OnPostUpload(IFormFile files, string title, string description, int id_user)
         {
             
-            return Ok(videosService.OnPostUploadAsync(files, title, description, _targetFilePath));
+            return Ok(videosService.OnPostUploadAsync(files, title, description, id_user, _targetFilePath));
         }
 
         [HttpPut]

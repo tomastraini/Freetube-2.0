@@ -1008,3 +1008,4 @@ D:\Proyectos desarrollo\Freetube-2.0\.Net (Back-end)\obj\Debug\net5.0\REST.dll
 D:\Proyectos desarrollo\Freetube-2.0\.Net (Back-end)\obj\Debug\net5.0\ref\REST.dll
 D:\Proyectos desarrollo\Freetube-2.0\.Net (Back-end)\obj\Debug\net5.0\REST.pdb
 D:\Proyectos desarrollo\Freetube-2.0\.Net (Back-end)\obj\Debug\net5.0\REST.genruntimeconfig.cache
+D:\Proyectos desarrollo\Freetube-2.0\.Net (Back-end)\bin\Debug\net5.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
