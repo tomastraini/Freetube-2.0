@@ -10,19 +10,27 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgForm } from '@angular/forms';
 import {MatGridListModule} from '@angular/material/grid-list';
 import { VideoWatchComponent } from './searchvideos/video-watch/video-watch.component';
-import { TableFilterPipe } from './mypipe';
+import { TableFilterPipe } from './Pipes/mypipe';
 import { SearchvideosComponent } from './searchvideos/searchvideos.component';
 import { MatPaginator, MatPaginatorModule, PageEvent } from '@angular/material/paginator';
-import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations'; 
+import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { PagnotfoundComponent } from './pagnotfound/pagnotfound.component';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
+import { SecurePipe } from './Pipes/SecurePipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     routingcomponents,
     TableFilterPipe,
+    SecurePipe,
     MenuComponent,
     VideoWatchComponent,
     SearchvideosComponent,
+    PagnotfoundComponent,
+    LoginComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,

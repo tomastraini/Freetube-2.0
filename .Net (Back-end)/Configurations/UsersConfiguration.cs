@@ -27,6 +27,18 @@ namespace Practise.Configurations
             entity.Property(e => e.imagepath)
                 .HasColumnName("imagepath");
 
+            entity.Property(e => e.id_rol)
+                .HasColumnName("id_rol");
+
+            entity.Property(e => e.correo)
+                .HasColumnName("correo");
+
+            entity.Property(e => e.nombreyapellido)
+                .HasColumnName("nombreyapellido");
+
+            entity.Property(e => e.telefono)
+                .HasColumnName("telefono");
+
             OnConfigurePartial(entity);
         }
 

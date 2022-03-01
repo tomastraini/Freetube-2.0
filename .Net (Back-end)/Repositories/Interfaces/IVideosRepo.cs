@@ -9,7 +9,7 @@ namespace REST.Repositories.Interfaces
 {
     public interface IVideosRepo
     {
-        videos UploadBD(string title, string description, string paths);
+        videos UploadBD(string title, string description, string paths, int id_user);
         List<videos> ListVideos();
         videos ModifyVideo(videos videos);
         string DestroyVideo(int id);

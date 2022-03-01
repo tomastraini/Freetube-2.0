@@ -23,7 +23,7 @@ namespace REST.Servicios.Interfaces
         // Funciones aparte
         string CheckDirectory(string directory)
         {
-            if (System.IO.Directory.Exists(directory) == true)
+            if (Directory.Exists(directory) == true)
             {
                 return directory;
             }
@@ -52,27 +52,70 @@ namespace REST.Servicios.Interfaces
             return repo.ChangePassword(id, pass);
         }
 
-        public List<users> GetUsers()
+        public List<UsersDTO> GetUsers()
         {
             return repo.GetUsers();
         }
 
-        public async void Register(string username, string password, IFormFile files, string filePath)
+        public async void Register(string username, string password, string correo,
+            string nombreyapellido, string telefono, IFormFile files, string filePath)
         {
+            if(files != null)
+            { 
+                var ext = Path.GetExtension(files.FileName);
+                filePath = Path.Combine(filePath,
+                Path.GetRandomFileName().Replace(".", string.Empty) + ext);
+                var finalfilepath = this.CheckDirectory(filePath);
+                finalfilepath += "\\" + Path.GetFileName(filePath);
+                repo.Register(username, password, correo, nombreyapellido, telefono, finalfilepath);
+                if (files.Length > 0)
+                {
+                    using (var stream = File.Create(filePath))
+                    {
+                        try
+                        {
+                            await files.CopyToAsync(stream);
+                        
+                        }
+                        catch (Exception e)
+                        {
+                            e.InnerException.ToString();
+                        }
+                    }
+                }
+            }
+            else
+            {
+                filePath = Path.Combine(filePath,
+                "default.png");
+                var finalfilepath = this.CheckDirectory(filePath);
+                finalfilepath += "\\" + Path.GetFileName(filePath);
+
+                repo.Register(username, password, correo, nombreyapellido, telefono, finalfilepath);
+            }
+
+        }
+
+        public void ChangeImage(int id_user, IFormFile files, string filePath)
+        {
+            if(files == null) { return; }
             var ext = Path.GetExtension(files.FileName);
             filePath = Path.Combine(filePath,
             Path.GetRandomFileName().Replace(".", string.Empty) + ext);
             var finalfilepath = this.CheckDirectory(filePath);
             finalfilepath += "\\" + Path.GetFileName(filePath);
-            repo.Register(username, password, finalfilepath);
-            if (files.Length > 0)
+            var changeFile = repo.ChangeImage(id_user, finalfilepath);
+            if(changeFile != "error")
             {
-                using (var stream = System.IO.File.Create(filePath))
+                if (File.Exists(changeFile))
+                {
+                    File.Delete(changeFile);
+                }
+                using (var stream = File.Create(changeFile))
                 {
                     try
                     {
-                        await files.CopyToAsync(stream);
-                        
+                        files.CopyTo(stream);
                     }
                     catch (Exception e)
                     {
@@ -80,6 +123,7 @@ namespace REST.Servicios.Interfaces
                     }
                 }
             }
+
         }
     }
 }

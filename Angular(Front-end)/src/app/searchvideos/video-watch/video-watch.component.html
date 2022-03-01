@@ -1,6 +1,6 @@
 <div class="videoContainerforView" id="videoContainerforView">
     <video id="videoViewer"
-    class="videoViewer"  src="https://localhost:44375/api/videos/watch/?id={{ id }}" 
+    class="videoViewer"  [attr.src]="src | secure | async" 
     controls>
     </video>
 </div>
@@ -15,3 +15,16 @@
         {{ video.description }}
     </p>
 </div>
+
+
+<div class ="comment" *ngFor="let comment of comments">
+    <div class ="profıle-ımage">
+      <p id ="name">{{ comment.usern.charAt(0).toUpperCase() }}</p>
+    </div>
+    <div class ="username">{{ comment.usern }}</div>
+    <div class ="user-comment">
+      <p>{{ comment.comment }}</p>
+      <div style ="clear:both;"></div>
+      <span>5 days ago</span>
+    </div>
+</div> 

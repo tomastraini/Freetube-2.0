@@ -9,5 +9,6 @@ namespace REST.DTOs
     {
         public string usern { get; set; }
         public string passwordu { get; set; }
+        public string rol { get; set; }
     }
 }
