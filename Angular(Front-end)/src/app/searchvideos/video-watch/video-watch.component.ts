@@ -10,24 +10,37 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class VideoWatchComponent implements OnInit {
 
   constructor(public route: ActivatedRoute, private http: HttpClient, public router: Router) 
-  { 
-
-  }
-  id: any
+  {}
+  id: any;
   video: any;
   src: any;
-  
-  ngOnInit(): void 
+  comments: any;
+  ngOnInit(): void
   {
       this.id = this.router.url.split('/')[2];
-      var newRoute = 'https://localhost:44375/api/videos/' + this.id;
-      this.http.get(newRoute)
-        .subscribe(res => {
-          if(res){ 
+      const newRoute = 'https://localhost:44375/api/videos/' + this.id;
+      this.http.get(newRoute,
+      {
+        headers:
+        {
+          Authorization: 'Bearer ' + sessionStorage.getItem('token')
+        }
+      }).subscribe(res => {
+          if (res){
             this.video = res;
+            this.src = 'https://localhost:44375/api/videos/watch/?id=' + this.video.id_video ;
+
+            this.http.get('https://localhost:44375/api/Comments/'  + this.id, {
+              headers: {
+                Authorization: 'Bearer ' + sessionStorage.getItem('token')
+              }
+            })
+              .subscribe(res => {
+                if (res){
+                    this.comments = res;
+                }
+            });
           }
       });
   }
-
-
 }

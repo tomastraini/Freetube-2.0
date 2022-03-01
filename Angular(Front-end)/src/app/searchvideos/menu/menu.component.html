@@ -4,7 +4,9 @@
     <div class="bg-dark" (click)="openVid(video)">
       <h3 class="header" class="text-light text-center" style="text-decoration: none">{{ video.title }}</h3>
 
-      <video height="200" width="400" class="ml-2" src="https://localhost:44375/api/videos/watch/?id={{ video.id_video }}"></video>
+      <video height="200" width="400" class="ml-2" 
+      [attr.src]="video.linksrc | secure | async">
+    </video>
       <p  class="text-light text-right ml-5" 
       *ngIf="descriptionLength === 0">
         {{ video.description?.slice(0,50) }}...

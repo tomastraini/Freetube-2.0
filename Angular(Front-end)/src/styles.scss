@@ -2,19 +2,19 @@
 
 footer
 {
-    // make sure the footer is always at the bottom of the page
     background-color: #f8f8f8;   
 
     border-top: 1px solid #e5e5e5;
     @media (max-width: 767px)
     {
-        // set the footer to the bottom of the page
         position: absolute;
         bottom: 0;
         width: 100%;
         height: 50px;
     }
-        
+
+    
+    
 }
 
 .githubOpen

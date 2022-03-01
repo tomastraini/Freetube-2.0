@@ -25,8 +25,19 @@
         type="search" placeholder="Buscar" aria-label="Search">
         
         <button class="btn btn-outline-danger" type="submit">Buscar</button>
+        
     </form>
-    <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#subirVideoModal"> <i class="fa fa-upload" aria-hidden="true"></i> </button>
+    <button class="signIn btn btn-danger" (click)="login()"> 
+        <i class="fa fa-sign-in" aria-hidden="true"></i> Iniciar sesión
+    </button>
+
+    <button class="signOut btn btn-danger" (click)="register()"> 
+        <i class="fa fa-user-plus" aria-hidden="true"></i> Registrarse
+    </button>
+    
+    <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#subirVideoModal"> 
+        <i class="fa fa-upload" aria-hidden="true"></i> 
+    </button>
     
     </div>
 </div>
@@ -42,34 +53,34 @@
         </div>
        
     <form #postAgregar="ngForm" (ngSubmit)= "onSubmitVid(postAgregar.value)">
-  
-    <div class="shadow bg-warning">
-        <h4 class="text-white text-center">
-            {{ this.mensajerror }}
-        </h4>
-    </div>
-
-    <div class="mb-3 text-center" >
-        <label for="selectitle" class="form-label">Titulo de video</label>
-        <input type="text" class="form-control" id="selectitle" ngModel name="selectitle" placeholder="Título de video">
-    </div>
-
     
-    <div class="mb-3 text-center" >
-        <label for="selectDesc" class="form-label">Descripcion de video</label>
-        <textarea type="text" class="form-control" id="selectDesc" ngModel name="selectDesc" placeholder="Descripcion de video" cols="30" rows="5">
-        </textarea>
-    </div>
+        <div class="shadow bg-warning">
+            <h4 class="text-white text-center">
+                {{ this.mensajerror }}
+            </h4>
+        </div>
 
-    <div class="modal-body text-center">
-        Seleccionar video
-        <input class="form-control" accept="video/mp4,video/x-m4v,video/*,.mkv" 
-         type="file" id="formFile" ngModel name="inputvid" (change)="onSelectFile($event)">
-    </div>
+        <div class="mb-3 text-center" >
+            <label for="selectitle" class="form-label">Titulo de video</label>
+            <input type="text" class="form-control" id="selectitle" ngModel name="selectitle" placeholder="Título de video">
+        </div>
 
-    <div class="modal-footer">
-        <button type="submit" class="btn btn-danger ">Subir video</button>
-    </div>
+        
+        <div class="mb-3 text-center" >
+            <label for="selectDesc" class="form-label">Descripcion de video</label>
+            <textarea type="text" class="form-control" id="selectDesc" ngModel name="selectDesc" placeholder="Descripcion de video" cols="30" rows="5">
+            </textarea>
+        </div>
+
+        <div class="modal-body text-center">
+            Seleccionar video
+            <input class="form-control" accept="video/mp4,video/x-m4v,video/*,.mkv" 
+            type="file" id="formFile" ngModel name="inputvid" (change)="onSelectFile($event)">
+        </div>
+
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-danger ">Subir video</button>
+        </div>
 
     </form>
     

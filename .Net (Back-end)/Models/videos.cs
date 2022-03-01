@@ -16,6 +16,7 @@ namespace REST.Models
         public string title { get; set; }
 
         public string description { get; set; }
+        public int id_user { get; set; }
 
     }
 }

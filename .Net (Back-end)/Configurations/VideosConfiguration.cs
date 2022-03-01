@@ -27,6 +27,9 @@ namespace Practise.Configurations
             entity.Property(e => e.description)
                 .HasColumnName("description");
 
+            entity.Property(e => e.id_user)
+                .HasColumnName("id_user");
+
             OnConfigurePartial(entity);
         }
 

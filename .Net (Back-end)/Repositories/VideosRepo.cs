@@ -56,6 +56,7 @@ namespace REST.Repositories
                     description = e.description,
                     paths = e.paths,
                     title = e.title,
+                    id_user = e.id_user
                 });
             });
 
@@ -71,6 +72,7 @@ namespace REST.Repositories
             bd.paths = videos.paths;
             bd.title = videos.title;
             bd.description = videos.description;
+            bd.id_user = videos.id_user;
 
             contexto.SaveChanges();
 
@@ -84,7 +86,7 @@ namespace REST.Repositories
                     select vid).FirstOrDefault();
         }
 
-        public videos UploadBD(string title, string description, string path)
+        public videos UploadBD(string title, string description, string path, int id_user)
         {
             try
             {
@@ -92,11 +94,13 @@ namespace REST.Repositories
                 videos.description = description;
                 videos.paths = path;
                 videos.title = title;
+                videos.id_user = id_user;
                 contexto.Videos.Add(new videos()
                 {
                     description = description,
                     paths = path,
-                    title = title
+                    title = title,
+                    id_user = id_user
                 });
                 contexto.SaveChanges();
                 return videos;

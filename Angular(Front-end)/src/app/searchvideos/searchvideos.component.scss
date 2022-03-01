@@ -66,3 +66,20 @@ nav
     }
   
 }
+
+.signIn 
+{
+    // make the button appear on the right side of the screen
+    position: absolute;
+    right: 75px;
+    top: 20px;
+    height: 40px;
+}
+
+.signOut
+{
+    position: absolute;
+    right: 250px;
+    top: 20px;
+    height: 40px;
+}

@@ -15,72 +15,70 @@ import { PageEvent} from '@angular/material/paginator';
 export class MenuComponent implements OnInit {
 
   constructor(private http: HttpClient, private app: AppComponent, private router: Router)
-  { 
-    if(sessionStorage.getItem("reload") !== null)
+  {
+    if (sessionStorage.getItem('reload') !== null)
     {
       setTimeout(() =>
       {
         this.reload();
-        sessionStorage.removeItem("reload");
+        sessionStorage.removeItem('reload');
       }, 1000);
     }
   }
-
-
-  reload()
-  {
-    var actualroute = this.router.url;
-    this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
-    this.router.navigate([actualroute]);
-  });
-  }
-  
-
-  breakpoint: number = 3;
-  length: number = 0;
-  pageSize: number = 3;  
-  pageSizeOptions: number[] = [3, 6, 9, 12];
+  breakpoint = 6;
+  length = 0;
+  pageSize = 6;
+  pageSizeOptions: number[] = [6];
 
   videos: any;
   videosOriginal: any;
+  comments: any;
   carpeta: any;
-  obj:any;
+  obj: any;
   videoElement: any;
   mover = 0;
   @Input() busquedavalue: any;
   descriptionLength: any;
 
+  reload(): void
+  {
+    const actualroute = this.router.url;
+    this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+    this.router.navigate([actualroute]);
+  });
+  }
   // after view init event
 
-  ngOnInit(): void 
+  ngOnInit(): void
   {
-    if(this.router.url.includes('/search'))
+    if (this.router.url.includes('/search'))
     {
       // split url to get search value
-      var searchvalue = this.router.url.split('/')[2];
+      const searchvalue = this.router.url.split('/')[2];
       this.busquedavalue = searchvalue;
     }
     this.breakpoint = (window.innerWidth <= 400) ? 1 : 6;
 
-    this.http.get('https://localhost:44375/api/videos')
-      .subscribe(res => {
-        if(res){ 
-          this.videosOriginal = res;
-          this.videos = res;
-          // make a foreach
+
+
+    this.http.get('https://localhost:44375/api/videos',{
+      headers: {
+        Authorization: 'Bearer ' + sessionStorage.getItem('token')
+        }
+      }
+        )
+      .subscribe(
+        (Response) =>
+        {
+          this.videosOriginal = Response;
+          this.videos = Response;
           this.videosOriginal.forEach(function(value: any){
             if (value.description == null) {
-              value.description = "";
+              value.description = '';
             }
-          })
-
-          this.videos = this.videos.slice(0, 6);
-          this.length = this.videos.length;
-          this.descriptionLength = this.videos.length;
-        }
-    })
-    
-
+            value.linksrc = 'https://localhost:44375/api/videos/watch/?id=' + value.id_video ;
+          });
+        });
   }
 
   OnPageChange(event: PageEvent){
