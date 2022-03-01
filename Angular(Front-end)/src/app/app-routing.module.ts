@@ -19,11 +19,11 @@ const routes: Routes = [
         component: MenuComponent
       },
       {
-        path: "watch/:id",
+        path: 'watch/:id',
         component: VideoWatchComponent
       },
       {
-        path: "search/:id",
+        path: 'search/:id',
         component: MenuComponent
       }
     ]
@@ -53,4 +53,4 @@ export class AppRoutingModule
   }
 }
 
-export const routingcomponents = [MenuComponent]
+export const routingcomponents = [MenuComponent];
