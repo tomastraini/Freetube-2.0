@@ -1,7 +1,7 @@
 USE [master]
 GO
 
-/****** Object:  Database [freetubeC]    Script Date: 11/03/2022 9:57:50 ******/
+/****** Object:  Database [freetubeC]    Script Date: 11/03/2022 10:07:58 ******/
 CREATE DATABASE [freetubeC]
  CONTAINMENT = NONE
  ON  PRIMARY 
@@ -111,6 +111,129 @@ ALTER DATABASE [freetubeC] SET QUERY_STORE = OFF
 GO
 
 ALTER DATABASE [freetubeC] SET  READ_WRITE 
+GO
+
+
+USE [freetubeC]
+GO
+
+/****** Object:  Table [dbo].[comments]    Script Date: 11/03/2022 10:08:35 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[comments](
+	[id_comment] [int] IDENTITY(1,1) NOT NULL,
+	[comment] [nvarchar](600) NULL,
+	[id_user] [int] NULL,
+	[id_video] [int] NULL,
+ CONSTRAINT [PK__comments__7E14AC854C2032DC] PRIMARY KEY CLUSTERED 
+(
+	[id_comment] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[comments]  WITH CHECK ADD  CONSTRAINT [FK__comments__id_use__4BAC3F29] FOREIGN KEY([id_user])
+REFERENCES [dbo].[users] ([id_user])
+GO
+
+ALTER TABLE [dbo].[comments] CHECK CONSTRAINT [FK__comments__id_use__4BAC3F29]
+GO
+
+ALTER TABLE [dbo].[comments]  WITH CHECK ADD  CONSTRAINT [FK__comments__id_vid__5AEE82B9] FOREIGN KEY([id_video])
+REFERENCES [dbo].[videos] ([id_video])
+GO
+
+ALTER TABLE [dbo].[comments] CHECK CONSTRAINT [FK__comments__id_vid__5AEE82B9]
+GO
+
+
+USE [freetubeC]
+GO
+
+/****** Object:  Table [dbo].[roles]    Script Date: 11/03/2022 10:08:58 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[roles](
+	[id_rol] [int] IDENTITY(1,1) NOT NULL,
+	[nombre_rol] [nvarchar](60) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[id_rol] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+
+USE [freetubeC]
+GO
+
+/****** Object:  Table [dbo].[users]    Script Date: 11/03/2022 10:09:07 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[users](
+	[id_user] [int] IDENTITY(1,1) NOT NULL,
+	[usern] [varchar](60) NULL,
+	[passwordu] [varchar](600) NULL,
+	[imagepath] [varchar](600) NULL,
+	[id_rol] [int] NULL,
+	[correo] [nvarchar](60) NULL,
+	[nombreyapellido] [nvarchar](60) NULL,
+	[telefono] [nvarchar](60) NULL,
+ CONSTRAINT [PK__users__D2D14637CF5A22F7] PRIMARY KEY CLUSTERED 
+(
+	[id_user] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[users]  WITH CHECK ADD  CONSTRAINT [FK__users__id_rol__160F4887] FOREIGN KEY([id_rol])
+REFERENCES [dbo].[roles] ([id_rol])
+GO
+
+ALTER TABLE [dbo].[users] CHECK CONSTRAINT [FK__users__id_rol__160F4887]
+GO
+
+
+USE [freetubeC]
+GO
+
+/****** Object:  Table [dbo].[videos]    Script Date: 11/03/2022 10:09:18 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[videos](
+	[id_video] [int] IDENTITY(1,1) NOT NULL,
+	[paths] [nvarchar](600) NULL,
+	[title] [nvarchar](40) NULL,
+	[description] [nvarchar](600) NULL,
+	[id_user] [int] NULL,
+ CONSTRAINT [PK__videos__2B9E8C402704684B] PRIMARY KEY CLUSTERED 
+(
+	[id_video] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[videos]  WITH CHECK ADD  CONSTRAINT [FK__videos__id_user__01142BA1] FOREIGN KEY([id_user])
+REFERENCES [dbo].[users] ([id_user])
+GO
+
+ALTER TABLE [dbo].[videos] CHECK CONSTRAINT [FK__videos__id_user__01142BA1]
 GO
 
 
