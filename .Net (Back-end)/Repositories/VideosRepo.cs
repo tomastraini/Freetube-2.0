@@ -1,4 +1,5 @@
 ﻿using REST.Contexts;
+using REST.DTOs;
 using REST.Models;
 using REST.Repositories.Interfaces;
 using System;
@@ -43,24 +44,18 @@ namespace REST.Repositories
             }
         }
 
-        public List<videos> ListVideos()
+        public List<videosDTO> ListVideos()
         {
-            var response = new List<videos>();
-            var consulta = (from vid in contexto.Videos
-                            select vid).ToList();
-
-            consulta.ForEach(e =>
-            {
-                response.Add(new videos() {
-                    id_video = e.id_video,
-                    description = e.description,
-                    paths = e.paths,
-                    title = e.title,
-                    id_user = e.id_user
-                });
-            });
-
-            return response;
+            return (from vid in contexto.Videos
+                            join us in contexto.users on vid.id_user equals us.id_user
+                            select new videosDTO()
+                            { 
+                                id_video = vid.id_video,
+                                description = vid.description,
+                                paths = vid.paths,
+                                title = vid.title,
+                                usern = us.usern
+                            }).ToList();
         }
 
         public videos ModifyVideo(videos videos)

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using REST.Contexts;
+using REST.DTOs;
 using REST.Models;
 using System;
 using System.Collections.Generic;
@@ -11,7 +12,7 @@ namespace REST.Servicios.Interfaces
 {
     public interface IVideosService
     {
-        List<videos> ListVideos();
+        List<videosDTO> ListVideos();
 
         videos OnPostUploadAsync(IFormFile files, string title, string description, int id_user, string path);
 

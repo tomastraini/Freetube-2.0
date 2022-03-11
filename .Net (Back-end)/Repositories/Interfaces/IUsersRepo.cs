@@ -10,10 +10,12 @@ namespace REST.Repositories.Interfaces
     public interface IUsersRepo
     {
         public List<UsersDTO> GetUsers();
-        public users ChangePassword(int id, string pass);
+        public UsersDTO GetUserById(string id);
+        public users ChangePassword(string id, string oldpass, string newpass);
         public  users Register(string username, string password
             , string correo,
             string nombreyapellido, string telefono, string finalfpath);
         public string ChangeImage(int id_user, string filePath);
+        public users Login(UsersDTO users);
     }
 }

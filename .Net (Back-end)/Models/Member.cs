@@ -10,6 +10,8 @@ namespace REST.Models
         public int Id { get; set; }
         public string Name { get; set; }
         public string Password { get; set; }
+        public bool userEnc { get; set; }
+        public bool passEnc { get; set; }
 
     }
 }

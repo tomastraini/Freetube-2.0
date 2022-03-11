@@ -23,12 +23,14 @@ export class AppComponent {
   }
 
   ngOnInit() {
-    if (sessionStorage.getItem('x') === undefined || sessionStorage.getItem('x') === null
-    || sessionStorage.getItem('x') === 'user')
+    if ((sessionStorage.getItem('x') === null && sessionStorage.getItem('y') === null)
+    || (sessionStorage.getItem('x') === 'user' && sessionStorage.getItem('y') === '123'))
     {
       this.http.post('https://localhost:44375/api/Authentication/authentication', {
             name: 'user',
-            password: '123'
+            password: '123',
+            userEnc: false,
+            passEnc: true
           }, {observe: 'response', responseType: 'text'})
           .subscribe(
             res =>
@@ -49,7 +51,9 @@ export class AppComponent {
     {
       this.http.post('https://localhost:44375/api/Authentication/authentication', {
             name: sessionStorage.getItem('x'),
-            password: sessionStorage.getItem('y')
+            password: sessionStorage.getItem('y'),
+            userEnc: true,
+            passEnc: false
           }, {observe: 'response', responseType: 'text'})
           .subscribe(
             res =>

@@ -1,4 +1,5 @@
 ﻿using REST.Contexts;
+using REST.DTOs;
 using REST.Models;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ namespace REST.Repositories.Interfaces
     public interface IVideosRepo
     {
         videos UploadBD(string title, string description, string paths, int id_user);
-        List<videos> ListVideos();
+        List<videosDTO> ListVideos();
         videos ModifyVideo(videos videos);
         string DestroyVideo(int id);
 

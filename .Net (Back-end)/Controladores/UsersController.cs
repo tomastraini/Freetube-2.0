@@ -9,6 +9,8 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 using System.Threading.Tasks;
 
 
@@ -19,6 +21,8 @@ namespace REST.Controladores
     public class UsersController : ControllerBase
     {
         private string filepath;
+        public readonly string publickey = "161481A$";
+        public readonly string secretkey = "Es13dla1";
         private string _targetFilePath;
         public readonly IUsersService service;
         public UsersController(IConfiguration config, IUsersService service)
@@ -56,26 +60,32 @@ namespace REST.Controladores
                 }
             }
         }
-      
+
+
+
         [HttpGet]
         public ActionResult GetUsers()
         {
             return Ok(service.GetUsers());
         }
+
+        [HttpPost("id")]
+        public ActionResult GetUsers([FromBody] UsersDTO users)
+        {
+            if (users.usern == null || users.usern == "") { return NotFound(); }
+            return Ok(service.GetUserById(users.usern));
+        }
         [HttpPost]
-        
         public ActionResult Register(IFormFile files, string username, string password, string correo,
             string nombreyapellido, string telefono)
         {
             service.Register(username, password, correo, nombreyapellido, telefono, files, _targetFilePath);
             return Ok();
         }
-
-
         [HttpPatch]
-        public ActionResult ChangePassword(int id_user, string pass)
+        public ActionResult ChangePassword(string id_user, string oldpass, string newpass)
         {
-            return Ok(service.ChangePassword(id_user, pass));
+            return Ok(service.ChangePassword(id_user, oldpass, newpass));
         }
 
         [HttpPatch("Image")]
@@ -84,5 +94,21 @@ namespace REST.Controladores
             service.ChangeImage(id_user, files, _targetFilePath);
             return Ok();
         }
+
+        [HttpPost("login")]
+        public ActionResult Login([FromBody] UsersDTO users)
+        {
+            if (users.usern == null || users.usern == "" ||
+            users.passwordu == null || users.passwordu == "") { return NoContent(); }
+            return Ok(service.Login(users));
+        }
+
+        [HttpGet("imageID")]
+        public IActionResult GetImageById(UsersDTO id_img)
+        {
+
+            return File(service.GetImageById(id_img), "application/octet-stream");
+        }
+
     }
 }

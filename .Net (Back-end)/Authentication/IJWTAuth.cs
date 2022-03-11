@@ -8,6 +8,6 @@ namespace REST.Authentication
 {
     public interface IJWTAuth
     {
-        string Authentication(string username, string password, List<users> userCredential);
+        string Authentication(string username, string password, bool userEnc, bool passEnc, List<users> userCredential);
     }
 }

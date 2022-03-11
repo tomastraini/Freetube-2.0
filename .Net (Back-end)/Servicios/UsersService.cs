@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using REST.DTOs;
 using REST.Models;
@@ -7,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace REST.Servicios.Interfaces
@@ -47,9 +49,9 @@ namespace REST.Servicios.Interfaces
             }
         }
         //xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-        public users ChangePassword(int id, string pass)
+        public users ChangePassword(string id, string oldpass, string newpass)
         {
-            return repo.ChangePassword(id, pass);
+            return repo.ChangePassword(id, oldpass, newpass);
         }
 
         public List<UsersDTO> GetUsers()
@@ -124,6 +126,31 @@ namespace REST.Servicios.Interfaces
                 }
             }
 
+        }
+
+        public UsersDTO GetUserById(string id)
+        {
+            return repo.GetUserById(id);
+        }
+
+        public users Login(UsersDTO users)
+        {
+            return repo.Login(users);
+        }
+
+        public byte[] GetImageById(UsersDTO id_img)
+        {
+            var imageToWatch = repo.Login(id_img);
+
+            if (imageToWatch != null && File.Exists(imageToWatch.imagepath))
+            {
+                var _fileContent = new FileContentResult(System.IO.File.ReadAllBytes(
+                                                   imageToWatch.imagepath),
+                                                   "application/octet-stream");
+                byte[] byteArray = _fileContent.FileContents;
+                return byteArray;
+            }
+            return Encoding.ASCII.GetBytes("NotFound!!");
         }
     }
 }

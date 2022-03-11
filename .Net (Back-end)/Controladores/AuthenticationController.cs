@@ -31,8 +31,10 @@ namespace REST.Controladores
         public IActionResult Authentication([FromBody] Member userCredential)
         {
             var users = (from us in ctx.users select us).ToList();
+            
 
-            var token = jwtAuth.Authentication(userCredential.Name, userCredential.Password, users);
+            var token = jwtAuth.Authentication(userCredential.Name, userCredential.Password,
+                userCredential.userEnc, userCredential.passEnc, users);
             
             if (token == null)
                 return Unauthorized();
