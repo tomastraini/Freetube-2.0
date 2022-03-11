@@ -11,7 +11,7 @@ namespace REST.Repositories.Interfaces
     {
         public List<UsersDTO> GetUsers();
         public UsersDTO GetUserById(string id);
-        public users ChangePassword(int id, string oldpass, string newpass);
+        public users ChangePassword(string id, string oldpass, string newpass);
         public  users Register(string username, string password
             , string correo,
             string nombreyapellido, string telefono, string finalfpath);

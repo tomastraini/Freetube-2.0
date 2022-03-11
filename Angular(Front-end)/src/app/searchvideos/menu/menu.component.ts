@@ -28,7 +28,7 @@ export class MenuComponent implements OnInit {
   breakpoint = 6;
   length = 0;
   pageSize = 6;
-  pageSizeOptions: number[] = [6];
+  pageSizeOptions = [6];
 
   videos: any;
   videosOriginal: any;
@@ -58,7 +58,8 @@ export class MenuComponent implements OnInit {
 
 
 
-    this.http.get('https://localhost:44375/api/videos',{
+    this.http.get('https://localhost:44375/api/videos',
+      {
       headers: {
         Authorization: 'Bearer ' + sessionStorage.getItem('token')
         }
@@ -70,15 +71,18 @@ export class MenuComponent implements OnInit {
           this.videosOriginal = Response;
           this.videos = Response;
           console.log(this.videos);
-          
-          this.videosOriginal.forEach(function(value: any){
+          this.videosOriginal.forEach((value: any) =>
+          {
             if (value.description == null)
             {
               value.description = '';
             }
             value.descriptionLength = value.description != null ? value.description.length : 0;
 
-            value.linksrc = 'https://localhost:44375/api/videos/watch/?id=' + value.id_video ;
+            value.linksrc = 'https://localhost:44375/api/videos/watch/?id=' + value.id_video;
+
+            value.imglinksrc = 'https://localhost:44375/api/Users/imageID' + value.id_user;
+
           });
         });
   }
@@ -97,8 +101,15 @@ export class MenuComponent implements OnInit {
     this.breakpoint = (event.target.innerWidth <= 400) ? 1 : 6;
   }
 
-  openVid(video: any): void
+  openVid($event: any, video: any): void
   {
-    window.location.href = '/watch/' + video.id_video;
+    if ($event.type === 'click')
+    {
+      window.location.href = '/watch/' + video.id_video;
+    }
+    else if($event.type === 'auxclick')
+    {
+      window.open('/watch/' + video.id_video, '_blank');
+    }
   }
 }

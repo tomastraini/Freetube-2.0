@@ -43,8 +43,8 @@ export class LoginComponent implements OnInit {
         {
           // get res.body.passwordu from json response
           const response = JSON.stringify(res.body);
-          const json = JSON.parse(response);          
-          sessionStorage.setItem('x', this.user);
+          const json = JSON.parse(response);
+          sessionStorage.setItem('x', json.usern);
           sessionStorage.setItem('y', json.passwordu);
           sessionStorage.setItem('m', json.id_user);
           window.location.href = '/';
