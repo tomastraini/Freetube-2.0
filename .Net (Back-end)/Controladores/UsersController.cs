@@ -103,11 +103,10 @@ namespace REST.Controladores
             return Ok(service.Login(users));
         }
 
-        [HttpGet("imageID")]
-        public IActionResult GetImageById(UsersDTO id_img)
+        [HttpGet("imageID/{usern}/{decrypt}")]
+        public IActionResult GetImageById(string usern, bool decrypt)
         {
-
-            return File(service.GetImageById(id_img), "application/octet-stream");
+            return File(service.GetImageById(usern, decrypt), "application/octet-stream");
         }
 
     }

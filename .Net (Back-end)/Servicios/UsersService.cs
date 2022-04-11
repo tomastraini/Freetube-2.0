@@ -72,17 +72,15 @@ namespace REST.Servicios.Interfaces
                 repo.Register(username, password, correo, nombreyapellido, telefono, finalfilepath);
                 if (files.Length > 0)
                 {
-                    using (var stream = File.Create(filePath))
+                    using var stream = File.Create(filePath);
+                    try
                     {
-                        try
-                        {
-                            await files.CopyToAsync(stream);
-                        
-                        }
-                        catch (Exception e)
-                        {
-                            e.InnerException.ToString();
-                        }
+                        await files.CopyToAsync(stream);
+
+                    }
+                    catch (Exception e)
+                    {
+                        e.InnerException.ToString();
                     }
                 }
             }
@@ -113,16 +111,14 @@ namespace REST.Servicios.Interfaces
                 {
                     File.Delete(changeFile);
                 }
-                using (var stream = File.Create(changeFile))
+                using var stream = File.Create(changeFile);
+                try
                 {
-                    try
-                    {
-                        files.CopyTo(stream);
-                    }
-                    catch (Exception e)
-                    {
-                        e.InnerException.ToString();
-                    }
+                    files.CopyTo(stream);
+                }
+                catch (Exception e)
+                {
+                    e.InnerException.ToString();
                 }
             }
 
@@ -138,9 +134,9 @@ namespace REST.Servicios.Interfaces
             return repo.Login(users);
         }
 
-        public byte[] GetImageById(UsersDTO id_img)
+        public byte[] GetImageById(string id_img, bool decrypt)
         {
-            var imageToWatch = repo.Login(id_img);
+            var imageToWatch = repo.GetUserByIdWithoutDTO(id_img, decrypt);
 
             if (imageToWatch != null && File.Exists(imageToWatch.imagepath))
             {

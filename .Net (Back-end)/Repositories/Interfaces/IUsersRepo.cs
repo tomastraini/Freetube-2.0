@@ -17,5 +17,6 @@ namespace REST.Repositories.Interfaces
             string nombreyapellido, string telefono, string finalfpath);
         public string ChangeImage(int id_user, string filePath);
         public users Login(UsersDTO users);
+        public users GetUserByIdWithoutDTO(string id, bool decrypt);
     }
 }

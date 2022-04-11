@@ -8,18 +8,48 @@
 <div *ngIf="video !== undefined ">
     <h1 class="title" maxlength="25">{{ video.title }}</h1>
 
-
     <hr class="description-div">
 
-    <p class="description">
+    <div class="inlineDescriptionAndButtons">
+      <p class="description">
         {{ video.description }}
-    </p>
+      </p>
+    <hr class="description-div">  
+      <div class="buttonsLikes">
+        <button class="btn btn-dark like">
+          Like
+          <i class="fa fa-thumbs-up" aria-hidden="true"></i>
+        </button>
+        <button class="btn btn-dark dislike">
+          Dislike
+          <i class="fa fa-thumbs-down" aria-hidden="true"></i>
+        </button>
+      </div>
+    </div>
 </div>
 
+<hr class="description-div">
 
-<div class ="comment" *ngFor="let comment of comments">
+<form class="formUploadComments" action="" (submit)="submitComment($event)">
+  <h3 class="commentTitle"> Ingrese su comentario </h3>
+
+  <textarea class="form-control textarea" name="commentText" id="" cols="100" rows="3"></textarea>
+
+  <button class="btn btn-dark sbmtComment" type="submit">
+    <i class="fa fa-paper-plane" aria-hidden="true"></i>
+  </button>
+</form>
+
+<hr class="description-div commentSection">
+
+<h3 class="commentTitle commentSectionTitle"> Sección de comentarios </h3>
+
+<hr class="description-div">
+
+<div>
+  <div class="comment" *ngFor="let comment of comments">
     <div class ="profıle-ımage">
-      <p id ="name">{{ comment.usern.charAt(0).toUpperCase() }}</p>
+      <img [attr.src]="comment.srcImage | secure | async" height="50" width="50">
     </div>
     <div class ="username">{{ comment.usern }}</div>
     <div class ="user-comment">
@@ -28,3 +58,4 @@
       <span>5 days ago</span>
     </div>
 </div> 
+</div>

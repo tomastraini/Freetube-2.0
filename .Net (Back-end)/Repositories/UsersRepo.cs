@@ -143,7 +143,6 @@ namespace REST.Repositories
 
         public UsersDTO GetUserById(string id)
         {
-            id = this.Decrypt(id);
             var response = (from users in ctx.users
                     join rol in ctx.roles on users.id_rol equals rol.id_rol
                     where users.usern == id
@@ -156,6 +155,15 @@ namespace REST.Repositories
             response.usern = this.Encrypt(response.usern);
 
             return response;
+        }
+
+        public users GetUserByIdWithoutDTO(string id, bool decrypt)
+        {
+            id = decrypt ? this.Decrypt(id) : id;
+
+            return (from users in ctx.users
+                    where users.usern == id
+                    select users).FirstOrDefault();
         }
 
         public List<UsersDTO> GetUsers()
@@ -212,9 +220,11 @@ namespace REST.Repositories
                          select us).FirstOrDefault();
             if(query != null) { return null; }
 
-            var response = new users();
-            response.id_user = 0;
-            response.usern = username;
+            var response = new users
+            {
+                id_user = 0,
+                usern = username
+            };
 
             using (SHA256 sha256Hash = SHA256.Create())
             {

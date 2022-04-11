@@ -18,4 +18,10 @@ namespace REST.Models
         public string nombreyapellido { get; set; }
         public string telefono { get; set; }
     }
+    public class userAskIMG
+    {
+        public string usern { get; set; }
+        public bool encrypt { get; set; }
+
+    }
 }

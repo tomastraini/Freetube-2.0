@@ -14,7 +14,8 @@ export class VideoWatchComponent implements OnInit {
   id: any;
   video: any;
   src: any;
-  comments: any;
+  comments: any = [];
+
   ngOnInit(): void
   {
       this.id = this.router.url.split('/')[2];
@@ -28,7 +29,8 @@ export class VideoWatchComponent implements OnInit {
       }).subscribe(res => {
           if (res){
             this.video = res;
-            this.src = 'https://localhost:44375/api/videos/watch/?id=' + this.video.id_video ;
+            this.src = 'https://localhost:44375/api/videos/watch/?id=' + this.video.id_video;
+
 
             this.http.get('https://localhost:44375/api/Comments/'  + this.id, {
               headers: {
@@ -38,9 +40,36 @@ export class VideoWatchComponent implements OnInit {
               .subscribe(res => {
                 if (res){
                     this.comments = res;
-                }
+                    for(let i = 0; i < this.comments.length; i++){
+                      this.comments[i].srcImage = 'https://localhost:44375/api/Users/imageID/' + this.comments[i].usern + '/' + false;
+                    }
+                  }
             });
           }
       });
+  }
+
+  submitComment(event: any): void
+  {
+    const newRoute = 'https://localhost:44375/api/Comments';
+    this.http.post(newRoute,
+    {
+      id_video: this.id,
+      comment: event.target.commentText.value,
+      id_user: sessionStorage.getItem('m')
+    },
+    {
+      headers:
+      {
+        Authorization: 'Bearer ' + sessionStorage.getItem('token')
+      }
+    }).subscribe(res => {
+        if (res){
+          this.comments.push(res);
+        }
+    });
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    this.router.onSameUrlNavigation = 'reload';
+    this.router.navigate(['/watch/' + this.id]);
   }
 }

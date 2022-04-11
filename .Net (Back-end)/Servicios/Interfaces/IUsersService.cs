@@ -17,6 +17,6 @@ namespace REST.Servicios.Interfaces
         public users ChangePassword(string id, string oldpass, string newpass);
         public void ChangeImage(int id_user, IFormFile files, string filePath);
         public users Login(UsersDTO users);
-        public byte[] GetImageById(UsersDTO id_img);
+        public byte[] GetImageById(string id_img, bool decrypt);
     }
 }

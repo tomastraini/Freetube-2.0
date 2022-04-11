@@ -38,7 +38,6 @@ video
     margin:10px auto;
     background:white;
     border-radius:5px;
-    // move this to the left
     margin-left: 5%;
     margin-right: 51%;    
   }
@@ -48,7 +47,6 @@ video
     width:60px;
     height:60px;
     margin:6px 0px 0px 6px;
-    background:#148F77;
     border-radius:300px;
   }
   
@@ -115,4 +113,73 @@ video
   #ds p:hover{
     cursor:pointer;
     opacity:1.0;
+  }
+
+  .buttonsLikes
+  {
+    margin-left: 5%;
+    margin-right: 51%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .like
+  {
+  }
+
+  .dislike
+  {
+  }
+
+  .like:hover
+  { 
+    background-color: #148F77;
+  }
+
+  .dislike:hover
+  {
+    background-color: #FF5252;
+  }
+
+  .inlineDescriptionAndButtons
+  {
+    margin-left: 3%;
+    margin-right: 51%;
+  }
+
+  .commentTitle
+  {
+    font-size: 30px;
+    font-family: 'Open Sans', sans-serif;
+  }
+
+  .formUploadComments
+  {
+    margin-left: 5%;
+    margin-right: 51%;
+  }
+
+  .textarea
+  {
+    resize: none;
+  }
+  
+  .sbmtComment
+  {
+    float: right;
+    margin-top: 1%;
+    margin-bottom: 5%;
+  }
+
+  .commentSection
+  {
+    margin-top: 5%;
+  }
+
+  .commentSectionTitle
+  {
+    margin-left: 5%;
+    margin-right: 51%;
   }
