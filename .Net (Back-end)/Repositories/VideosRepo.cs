@@ -18,6 +18,8 @@ namespace REST.Repositories
             this.contexto = contexto;
         }
 
+
+
         public string DestroyVideo(int id)
         {
             var destroy = (from vid in contexto.Videos
@@ -46,16 +48,26 @@ namespace REST.Repositories
 
         public List<videosDTO> ListVideos()
         {
-            return (from vid in contexto.Videos
+            var response = (from vid in contexto.Videos
                             join us in contexto.users on vid.id_user equals us.id_user
                             select new videosDTO()
                             { 
                                 id_video = vid.id_video,
                                 description = vid.description,
+                                id_user = vid.id_user,
                                 paths = vid.paths,
                                 title = vid.title,
                                 usern = us.usern
                             }).ToList();
+            var likeTable = (from lik in contexto.likes
+                             select lik);
+
+            response.ForEach(r => {
+                r.likes = likeTable.Where(lt => lt.id_video == r.id_video && lt.liked == true).Count();
+                r.dislikes = likeTable.Where(lt => lt.id_video == r.id_video && lt.liked == false).Count();
+            });
+
+            return response;
         }
 
         public videos ModifyVideo(videos videos)
@@ -74,11 +86,26 @@ namespace REST.Repositories
             return videos;
         }
 
-        public videos OneVideo(int id)
+        public videosDTO OneVideo(int id)
         {
-            return (from vid in contexto.Videos
+            var query = (from vid in contexto.Videos
                     where vid.id_video == id
                     select vid).FirstOrDefault();
+            if(query == null) { return null; }
+            var likeTable = (from lik in contexto.likes
+                             select lik);
+            var response = new videosDTO()
+            {
+                id_video = query.id_video,
+                description = query.description,
+                likes = likeTable.Where(lt => lt.id_video == query.id_video && lt.liked == true).Count(),
+                dislikes = likeTable.Where(lt => lt.id_video == query.id_video && lt.liked == false).Count(),
+                id_user = query.id_user,
+                title = query.title,
+                usern = query.id_user.ToString()
+            };
+
+            return response;
         }
 
         public videos UploadBD(string title, string description, string path, int id_user)
@@ -114,6 +141,55 @@ namespace REST.Repositories
                         select vid).FirstOrDefault();
 
             return response;
+        }
+
+        public void deleteLike(likes like)
+        {
+            var exists = (from lik in contexto.likes
+                          where lik.id_video == like.id_video &&
+                          lik.id_user == like.id_user
+                          select lik).FirstOrDefault();
+            if (exists != null)
+            {
+                contexto.likes.Remove(exists);
+                contexto.SaveChanges();
+            }
+        }
+
+        public int getIfLiked(likes like)
+        {
+            var exists = (from lik in contexto.likes
+                          where lik.id_video == like.id_video &&
+                          lik.id_user == like.id_user
+                          select lik).FirstOrDefault();
+            if (exists == null)
+            {
+                return 3;
+            }
+            if(exists.liked == true) { return 1; } else { return 0; }
+        }
+
+        public void likeVideo(likes like)
+        {
+            var exists = (from lik in contexto.likes
+                          where lik.id_video == like.id_video &&
+                          lik.id_user == like.id_user
+                          select lik).FirstOrDefault();
+            if (exists == null)
+            {
+                contexto.likes.Add(new likes()
+                {
+                    id_user = like.id_user,
+                    id_video = like.id_video,
+                    liked = like.liked
+                });
+                contexto.SaveChanges();
+            }
+            else
+            {
+                exists.liked = like.liked;
+                contexto.SaveChanges();
+            }
         }
     }
 }

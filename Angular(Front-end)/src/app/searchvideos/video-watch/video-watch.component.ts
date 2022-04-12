@@ -51,25 +51,32 @@ export class VideoWatchComponent implements OnInit {
 
   submitComment(event: any): void
   {
-    const newRoute = 'https://localhost:44375/api/Comments';
-    this.http.post(newRoute,
+    if (sessionStorage.getItem('m') !== null && sessionStorage.getItem('m') !== undefined)
     {
-      id_video: this.id,
-      comment: event.target.commentText.value,
-      id_user: sessionStorage.getItem('m')
-    },
-    {
-      headers:
+      const newRoute = 'https://localhost:44375/api/Comments';
+      this.http.post(newRoute,
       {
-        Authorization: 'Bearer ' + sessionStorage.getItem('token')
-      }
-    }).subscribe(res => {
-        if (res){
-          this.comments.push(res);
+        id_video: this.id,
+        comment: event.target.commentText.value,
+        id_user: sessionStorage.getItem('m')
+      },
+      {
+        headers:
+        {
+          Authorization: 'Bearer ' + sessionStorage.getItem('token')
         }
-    });
-    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-    this.router.onSameUrlNavigation = 'reload';
-    this.router.navigate(['/watch/' + this.id]);
+      }).subscribe(res => {
+          if (res){
+            this.comments.push(res);
+          }
+      });
+      this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+      this.router.onSameUrlNavigation = 'reload';
+      this.router.navigate(['/watch/' + this.id]);
+    }
+    else
+    {
+      this.router.navigate(['/login']);
+    }
   }
 }

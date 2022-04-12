@@ -14,9 +14,10 @@ namespace REST.Repositories.Interfaces
         List<videosDTO> ListVideos();
         videos ModifyVideo(videos videos);
         string DestroyVideo(int id);
-
         videos watchVideo(int id);
-
-        videos OneVideo(int id);
+        videosDTO OneVideo(int id);
+        public void likeVideo(likes like);
+        public int getIfLiked(likes like);
+        public void deleteLike(likes like);
     }
 }

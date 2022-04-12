@@ -81,7 +81,7 @@ export class MenuComponent implements OnInit {
 
             value.linksrc = 'https://localhost:44375/api/videos/watch/?id=' + value.id_video;
 
-            value.imglinksrc = 'https://localhost:44375/api/Users/imageID' + value.id_user;
+            value.imglinksrc = 'https://localhost:44375/api/Users/imageID' + '/' + value.id_user + '/' + false;
 
           });
         });

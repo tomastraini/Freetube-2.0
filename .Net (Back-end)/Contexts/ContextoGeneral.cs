@@ -25,6 +25,7 @@ namespace REST.Contexts
         public DbSet<users> users { get; set; }
         public DbSet<Roles> roles { get; set; }
         public DbSet<videos> Videos { get; set; }
+        public DbSet<likes> likes { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -32,6 +33,7 @@ namespace REST.Contexts
             modelBuilder.ApplyConfiguration(new UsersConfiguration());
             modelBuilder.ApplyConfiguration(new RolesConfiguration());
             modelBuilder.ApplyConfiguration(new VideosConfiguration());
+            modelBuilder.ApplyConfiguration(new LikesConfiguration());
             OnModelCreatingPartial(modelBuilder);
 
         }

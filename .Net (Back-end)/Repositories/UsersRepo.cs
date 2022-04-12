@@ -160,10 +160,21 @@ namespace REST.Repositories
         public users GetUserByIdWithoutDTO(string id, bool decrypt)
         {
             id = decrypt ? this.Decrypt(id) : id;
+            bool isNumber = int.TryParse(id, out int num);
 
-            return (from users in ctx.users
-                    where users.usern == id
-                    select users).FirstOrDefault();
+            if(isNumber)
+            {
+                return (from users in ctx.users
+                        where users.id_user == num
+                        select users).FirstOrDefault();
+            }
+            else
+            {
+                return (from users in ctx.users
+                        where users.usern == id
+                        select users).FirstOrDefault();
+            }
+
         }
 
         public List<UsersDTO> GetUsers()

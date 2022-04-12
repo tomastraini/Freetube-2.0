@@ -6,8 +6,6 @@
       <video height="200" width="400" class="ml-2 mt-3" 
       [attr.src]="video.linksrc | secure | async">
       </video>
-      
-      
 
       <h3 class="header" class="vidTitle text-light text-start ml-5" style="text-decoration: none" *ngIf="video.title.length > 24">
         {{ video.title?.substring(0,22) }}
@@ -17,9 +15,14 @@
         {{ video.title }}
       </h3>
 
-      <p  class="vidUser text-light text-start ml-5">
-        {{ video.usern }}
-      </p>
+      <div class="vidUser">
+        <img class="vidUserIMG" [attr.src]="video.imglinksrc | secure | async">
+
+        <p  class="text-light text-start ml-5 vidUserText">
+          {{ video.usern }}
+        </p>
+      </div>
+
       
 
     </div>

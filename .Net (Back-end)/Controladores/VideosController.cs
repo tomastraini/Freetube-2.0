@@ -63,6 +63,7 @@ namespace REST.Controladores
                 }   
             }
         }
+
         [HttpGet]
         public ActionResult ListVideos()
         {
@@ -97,6 +98,26 @@ namespace REST.Controladores
         {
             var video = videosService.watchVideo(id);
             return File(video, "application/octet-stream");
+        }
+
+        [HttpPost("getIfLiked")]
+        public ActionResult getIfLiked(likes like)
+        {
+            
+            return Ok(videosService.getIfLiked(like));
+        }
+
+        [HttpPost("like")]
+        public ActionResult likeVideo(likes like)
+        {
+            videosService.likeVideo(like);
+            return Ok();
+        }
+        [HttpDelete("like")]
+        public ActionResult deleteLike(likes like)
+        {
+            videosService.deleteLike(like);
+            return Ok();
         }
     }
 }

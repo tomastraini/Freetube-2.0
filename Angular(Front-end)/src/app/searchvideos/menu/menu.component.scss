@@ -1,20 +1,10 @@
-p {
-    margin: 0;
-    text-indent: 2rem;
-    text-align: justify;
-    font-family: 'Open Sans', sans-serif;
-  }
 .bg-dark
 {
   cursor: pointer;
 }
-h3
+
+.mat-tooltip
 {
-  font-family: 'Open Sans', sans-serif;
-
-}
-
-.mat-tooltip {
   top: 104px;
 }
 .pagination {
@@ -36,7 +26,6 @@ h3
   filter: alpha(opacity=80);
   cursor: pointer;
   z-index: 1;
-  
 }
 
 video:hover
@@ -46,22 +35,73 @@ video:hover
   z-index: 2;
 }
 
-.vidBackground
+video
 {
-    margin-bottom: 15%;
+  object-fit: fill;
+  max-width: 300px;
+  max-height: 150px;
 }
 
-.vidTitle
+p
 {
-  margin-left: 13%;
+  font-family: 'Open Sans', sans-serif;
 }
 
 .vidUser
 {
-  margin-left: 6.5%;
+  display: flex;
+  margin-bottom: 5%;
+}
+
+.vidUserText
+{
+  margin-left: 3.5%;
+  margin-bottom: 5%;
+  font-size: large;
+}
+
+.vidUserIMG
+{
+  margin-top: -10%;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+.vidTitle
+{
+  font-family: 'Open Sans', sans-serif;
+  font-size: large;
+  margin-left: 20%;
 }
 
 .matGrid
 {
   margin-top: 3%;
 }
+
+@media screen and (min-width: 1920px) {
+  .matGrid {
+    width: 1920px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  ::ng-deep {
+    .mat-grid-list {
+      width: auto;
+      height: auto;
+      margin-bottom: 10%;
+      margin-left: 10%;
+    }
+    video
+    {
+      object-fit: fill;
+      max-width: 60px;
+      max-height: 30px;
+    }
+  }
+}
+
+
+

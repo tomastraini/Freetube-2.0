@@ -10,13 +10,9 @@ namespace REST.Models
     public class videos
     {
         public int id_video { get; set; }
-
         public string paths { get; set; }
-
         public string title { get; set; }
-
         public string description { get; set; }
         public int id_user { get; set; }
-
     }
 }

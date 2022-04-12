@@ -112,9 +112,24 @@ namespace REST.Servicios
             return Encoding.ASCII.GetBytes("NotFound!!");
         }
 
-        public videos OneVideo(int id)
+        public videosDTO OneVideo(int id)
         {
             return repo.OneVideo(id);
+        }
+
+        public void likeVideo(likes like)
+        {
+            repo.likeVideo(like);
+        }
+
+        public int getIfLiked(likes like)
+        {
+            return repo.getIfLiked(like);
+        }
+
+        public void deleteLike(likes like)
+        {
+            repo.deleteLike(like);
         }
     }
 }
