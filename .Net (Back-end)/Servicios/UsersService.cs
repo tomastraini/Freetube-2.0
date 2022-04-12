@@ -72,11 +72,12 @@ namespace REST.Servicios.Interfaces
                 repo.Register(username, password, correo, nombreyapellido, telefono, finalfilepath);
                 if (files.Length > 0)
                 {
-                    using var stream = File.Create(filePath);
                     try
                     {
-                        await files.CopyToAsync(stream);
-
+                        using (var stream = File.Create(filePath))
+                        {
+                            await files.CopyToAsync(stream);
+                        }
                     }
                     catch (Exception e)
                     {

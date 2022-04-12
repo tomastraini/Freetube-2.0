@@ -1,5 +1,6 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders, } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 
@@ -10,7 +11,7 @@ import { catchError, map } from 'rxjs/operators';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(public http: HttpClient) {  }
+  constructor(public http: HttpClient, public router: Router) {  }
 
   user: any;
   password: any;
@@ -56,7 +57,10 @@ export class LoginComponent implements OnInit {
       }
     );
   }
-
+  register(): void
+  {
+    this.router.navigate(['/register']);
+  }
 }
 
 

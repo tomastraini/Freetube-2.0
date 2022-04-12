@@ -55,6 +55,7 @@ export class AppComponent implements OnDestroy, OnInit {
                 sessionStorage.setItem('y', '123');
 
                 sessionStorage.setItem('token', token.toString());
+                this.router.navigate(['/']);
               }
             }
           );

@@ -18,6 +18,7 @@ import { PagnotfoundComponent } from './pagnotfound/pagnotfound.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { SecurePipe } from './Pipes/SecurePipe';
+import {MatSelectModule} from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { SecurePipe } from './Pipes/SecurePipe';
     HttpClientModule,
     FormsModule,
     MatGridListModule,
+    MatSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]

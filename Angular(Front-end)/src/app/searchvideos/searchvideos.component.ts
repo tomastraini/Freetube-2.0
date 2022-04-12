@@ -30,6 +30,7 @@ export class SearchvideosComponent implements OnInit {
   id: any;
   view = '';
 
+  userImg = '';
   loggedIn = false;
 
   ngOnInit(): void
@@ -38,7 +39,10 @@ export class SearchvideosComponent implements OnInit {
     const password = sessionStorage.getItem('y');
     this.loggedIn = user !== 'user' && password !== '123';
 
-
+    if (sessionStorage.getItem('m') !== undefined && sessionStorage.getItem('m') !== null)
+    {
+      this.userImg = 'https://localhost:44375/api/Users/imageID/' + sessionStorage.getItem('m') + '/' + false;
+    }
     if (this.router.url.includes('/watch'))
     {
       this.view = 'watch';

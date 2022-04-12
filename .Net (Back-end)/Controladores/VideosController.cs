@@ -114,8 +114,9 @@ namespace REST.Controladores
             return Ok();
         }
         [HttpDelete("like")]
-        public ActionResult deleteLike(likes like)
+        public ActionResult deleteLike(int id_video, int id_user)
         {
+            var like = new likes() { id_video = id_video, id_user = id_user };
             videosService.deleteLike(like);
             return Ok();
         }

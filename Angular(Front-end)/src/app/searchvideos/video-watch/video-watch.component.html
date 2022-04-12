@@ -16,11 +16,12 @@
       </p>
     <hr class="description-div">  
       <div class="buttonsLikes">
-        <button [class.like]="liked === 3 || liked === 0" [class.alreadyLiked]="liked === 1" class="btn btn-dark" (click)="like()">
+        <button [class.like]="liked !== 1" [class.alreadyLiked]="liked === 1" class="btn btn-dark" (click)="like()">
           Like
           <i class="fa fa-thumbs-up" aria-hidden="true"></i>
         </button>
-        <button [class.dislike]="liked === 3 || liked === 1" [class.alreadyDisliked]="liked === 0" class="btn btn-dark">
+        
+        <button [class.dislike]="liked !== 0" [class.alreadyDisliked]="liked === 0" class="btn btn-dark" (click)="dislike()">
           Dislike
           <i class="fa fa-thumbs-down" aria-hidden="true"></i>
         </button>

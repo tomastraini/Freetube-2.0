@@ -17,6 +17,14 @@ export class VideoWatchComponent implements OnInit {
   comments: any = [];
   liked: any;
 
+  reload(): void
+  {
+    const actualroute = this.router.url;
+    this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+      this.router.navigateByUrl(actualroute);
+    });
+  }
+
   ngOnInit(): void
   {
       this.id = this.router.url.split('/')[2];
@@ -119,4 +127,90 @@ export class VideoWatchComponent implements OnInit {
       this.router.navigate(['/login']);
     }
   }
+
+  like(): void
+  {
+    if (sessionStorage.getItem('m') !== null && sessionStorage.getItem('m') !== undefined)
+    {
+      if (this.liked !== 1)
+      {
+        this.http.post('https://localhost:44375/api/Videos/like',
+        {
+          id_video: this.id,
+          id_user: sessionStorage.getItem('m'),
+          liked: true
+        },
+        {
+          headers:
+          {
+            Authorization: 'Bearer ' + sessionStorage.getItem('token')
+          }
+        }).subscribe(res => {
+              this.liked = 1;
+              this.reload();
+        });
+      }
+      else
+      {
+        this.http.delete('https://localhost:44375/api/Videos/like?id_video=' + this.id + '&id_user=' + sessionStorage.getItem('m'),
+        {
+          headers:
+          {
+            Authorization: 'Bearer ' + sessionStorage.getItem('token')
+          }
+        }).subscribe(res => {
+              this.liked = 3;
+              this.reload();
+        });
+      }
+    }
+    else
+    {
+      this.router.navigate(['/login']);
+    }
+  }
+
+  dislike(): void
+  {
+    if (sessionStorage.getItem('m') !== null && sessionStorage.getItem('m') !== undefined)
+    {
+      if (this.liked !== 0)
+      {
+        this.http.post('https://localhost:44375/api/Videos/like',
+        {
+          id_video: this.id,
+          id_user: sessionStorage.getItem('m'),
+          liked: false
+        },
+        {
+          headers:
+          {
+            Authorization: 'Bearer ' + sessionStorage.getItem('token')
+          }
+        }).subscribe(res => {
+              this.liked = 0;
+              this.reload();
+        });
+      }
+      else
+      {
+        this.http.delete('https://localhost:44375/api/Videos/like?id_video=' + this.id + '&id_user=' + sessionStorage.getItem('m'),
+        {
+          headers:
+          {
+            Authorization: 'Bearer ' + sessionStorage.getItem('token')
+          }
+        }).subscribe(res => {
+              this.liked = 3;
+              this.reload();
+        });
+      }
+
+    }
+    else
+    {
+      this.router.navigate(['/login']);
+    }
+  }
+
 }

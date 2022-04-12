@@ -38,7 +38,9 @@ export class MenuComponent implements OnInit {
   reload(): void
   {
     const actualroute = this.router.url;
-    this.router.navigateByUrl('/', {skipLocationChange: true});
+    this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+      this.router.navigateByUrl(actualroute);
+    });
   }
 
 
