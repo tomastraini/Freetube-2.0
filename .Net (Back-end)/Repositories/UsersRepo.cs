@@ -143,18 +143,36 @@ namespace REST.Repositories
 
         public UsersDTO GetUserById(string id)
         {
-            var response = (from users in ctx.users
-                    join rol in ctx.roles on users.id_rol equals rol.id_rol
-                    where users.usern == id
-                    select new UsersDTO()
-                    {
-                        usern = users.usern,
-                        passwordu = users.passwordu,
-                        rol = rol.nombre_rol
-                    }).FirstOrDefault();
-            response.usern = this.Encrypt(response.usern);
+            bool isNumber = int.TryParse(id, out int num);
 
-            return response;
+            if(isNumber)
+            {
+                var response = (from users in ctx.users
+                                join rol in ctx.roles on users.id_rol equals rol.id_rol
+                                where users.id_user == num
+                                select new UsersDTO()
+                                {
+                                    usern = users.usern,
+                                    passwordu = users.passwordu,
+                                    rol = rol.nombre_rol
+                                }).FirstOrDefault();
+
+                return response;
+            }
+            else
+            {
+                var response = (from users in ctx.users
+                                join rol in ctx.roles on users.id_rol equals rol.id_rol
+                                where users.usern == id
+                                select new UsersDTO()
+                                {
+                                    usern = users.usern,
+                                    passwordu = users.passwordu,
+                                    rol = rol.nombre_rol
+                                }).FirstOrDefault();
+
+                return response;
+            }
         }
 
         public users GetUserByIdWithoutDTO(string id, bool decrypt)

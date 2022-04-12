@@ -19,6 +19,10 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit(): void
   {
+    if (sessionStorage.getItem("m") !== null && sessionStorage.getItem("m") !== undefined)
+    {
+      window.location.href = '/';
+    }
   }
 
   login(): void
@@ -96,5 +100,10 @@ export class RegisterComponent implements OnInit {
 
         reader.readAsDataURL(this.file);
     }
-}
+  }
+
+  goAbout(): void
+  {
+    this.router.navigate(['/about']);
+  }
 }

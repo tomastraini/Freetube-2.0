@@ -6,6 +6,8 @@ import { MenuComponent } from './searchvideos/menu/menu.component';
 import { SearchvideosComponent } from './searchvideos/searchvideos.component';
 import { VideoWatchComponent } from './searchvideos/video-watch/video-watch.component';
 import { RegisterComponent } from './register/register.component';
+import { AboutComponent } from './searchvideos/about/about.component';
+import { ProfileComponent } from './searchvideos/profile/profile.component';
 
 const routes: Routes = [
   {
@@ -25,7 +27,15 @@ const routes: Routes = [
       {
         path: 'search/:id',
         component: MenuComponent
-      }
+      },
+      {
+        path: 'about',
+        component: AboutComponent
+      },
+      {
+        path: 'profile',
+        component: ProfileComponent
+      },
     ]
   },
   {
@@ -36,6 +46,7 @@ const routes: Routes = [
     path: 'login',
     component: LoginComponent
   },
+
   {
     path: '**',
     component: PagnotfoundComponent

@@ -53,12 +53,23 @@ export class SearchvideosComponent implements OnInit {
     {
       this.view = 'search';
     }
+
+    if (this.router.url.includes('/about'))
+    {
+      this.view = 'about';
+    }
+
+    if (this.router.url.includes('/profile'))
+    {
+      this.view = 'profile';
+    }
+
   }
 
   reload(): void
   {
     const actualroute = this.router.url;
-    this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+    this.router.navigateByUrl(actualroute, {skipLocationChange: true}).then(() => {
       this.router.navigate([actualroute]);
     });
   }
@@ -114,10 +125,21 @@ export class SearchvideosComponent implements OnInit {
   {
     this.router.navigate(['/register']);
   }
+
+  goAbout(): void
+  {
+    window.location.href = '/about';
+  }
+
   logout(): void
   {
     sessionStorage.setItem('x', 'user');
     sessionStorage.setItem('y', '123');
     window.location.reload();
+  }
+
+  goToProfile(): void
+  {
+    window.location.href = '/profile';
   }
 }

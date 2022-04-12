@@ -19,8 +19,13 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void
   {
+    if (sessionStorage.getItem("m") !== null && sessionStorage.getItem("m") !== undefined)
+    {
+      window.location.href = '/';
+    }
     sessionStorage.removeItem('user');
     sessionStorage.removeItem('password');
+
   }
 
   login(event: any): void
@@ -60,6 +65,10 @@ export class LoginComponent implements OnInit {
   register(): void
   {
     this.router.navigate(['/register']);
+  }
+  goAbout(): void
+  {
+    this.router.navigate(['/about']);
   }
 }
 

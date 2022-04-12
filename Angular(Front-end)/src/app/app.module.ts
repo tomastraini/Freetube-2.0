@@ -19,6 +19,8 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { SecurePipe } from './Pipes/SecurePipe';
 import {MatSelectModule} from '@angular/material/select';
+import { AboutComponent } from './searchvideos/about/about.component';
+import { ProfileComponent } from './searchvideos/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +34,8 @@ import {MatSelectModule} from '@angular/material/select';
     PagnotfoundComponent,
     LoginComponent,
     RegisterComponent,
+    AboutComponent,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,

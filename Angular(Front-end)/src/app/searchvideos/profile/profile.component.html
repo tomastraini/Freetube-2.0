@@ -1,0 +1,4 @@
+<div class="sutileBackground">
+    <img *ngIf="loggedIn == true" class="profile-image-img" [attr.src]="userImg | secure | async" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+    <h1 class="userName">{{ userName }}</h1>
+</div>

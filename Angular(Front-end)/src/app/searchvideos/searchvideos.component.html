@@ -11,7 +11,7 @@
         <a class="nav-link active" aria-current="page" href="/">Inicio</a>
         </li>
         <li class="nav-item">
-        <a class="nav-link" href="/about">Sobre nosotros</a>
+        <a class="nav-link" (click)="goAbout()">Sobre nosotros</a>
         </li>
     </ul>
 
@@ -44,7 +44,7 @@
     <div class="dropdown">
         <img *ngIf="loggedIn == true" class="profile-image-img" [attr.src]="userImg | secure | async" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-          <li><a class="dropdown-item" href="#">Ver mi perfil</a></li>
+          <li><a class="dropdown-item" (click)="goToProfile()">Ver mi perfil</a></li>
         </ul>
       </div>
    
@@ -114,3 +114,7 @@
 <app-menu class="menu" [busquedavalue]="busquedavalue" *ngIf="view == '' || view == 'search'"></app-menu>
 
 <app-video-watch class="watchvideo" *ngIf="view == 'watch'"></app-video-watch>
+
+<app-about class="about" *ngIf="view == 'about'"></app-about>
+
+<app-profile class="profile" *ngIf="view == 'profile'"></app-profile>
