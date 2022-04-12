@@ -13,18 +13,14 @@ import { PageEvent} from '@angular/material/paginator';
   ]
 })
 export class MenuComponent implements OnInit {
-
   constructor(private http: HttpClient, private app: AppComponent, private router: Router)
   {
-    if (sessionStorage.getItem('reload') !== null)
+    if (sessionStorage.getItem('reload') !== null || sessionStorage.getItem('reload') !== undefined)
     {
-      setTimeout(() =>
-      {
         this.reload();
-        sessionStorage.removeItem('reload');
-      }, 1000);
     }
   }
+
   breakpoint = 6;
   length = 0;
   pageSize = 6;
@@ -42,10 +38,9 @@ export class MenuComponent implements OnInit {
   reload(): void
   {
     const actualroute = this.router.url;
-    this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
-    this.router.navigate([actualroute]);
-  });
+    this.router.navigateByUrl('/', {skipLocationChange: true});
   }
+
 
   ngOnInit(): void
   {

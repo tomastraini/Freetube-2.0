@@ -42,27 +42,7 @@ video
     margin-right: 51%;    
   }
   
-  .comment .profıle-ımage{
-    float:left;
-    width:60px;
-    height:60px;
-    margin:6px 0px 0px 6px;
-    border-radius:300px;
-  }
-  
-  .comment .profıle-ımage:hover{
-    opacity:0.6;
-  }
-  
-  .comment .profıle-ımage #name{
-    color:white;
-    font-size:25px;
-    margin:0px;
-    padding-top:15px;
-    text-align:center;
-    
-  }
-  
+
   .comment .username{
     float:left;
     color:#212121;
@@ -125,23 +105,6 @@ video
     align-items: center;
   }
 
-  .like
-  {
-  }
-
-  .dislike
-  {
-  }
-
-  .like:hover
-  { 
-    background-color: #148F77;
-  }
-
-  .dislike:hover
-  {
-    background-color: #FF5252;
-  }
 
   .inlineDescriptionAndButtons
   {
@@ -182,4 +145,53 @@ video
   {
     margin-left: 5%;
     margin-right: 51%;
+  }
+
+  .profile-image-img
+  {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+  }
+
+  .comment .profile-image{
+    float:left;
+    width:60px;
+    height:60px;
+    margin:6px 0px 0px 6px;
+    border-radius:300px;
+  }
+  
+  .comment .profile-image:hover{
+    opacity:0.6;
+  }
+  
+  .like:hover
+  { 
+    background-color: #148F77;
+  }
+
+  .dislike:hover
+  {
+    background-color: #FF5252;
+  }
+
+  .alreadyDisliked
+  {
+    background-color: #FF5252;
+  }
+  
+  .alreadyDisliked:hover
+  {
+    background-color: #f7f7f7;
+  }
+
+  .alreadyLiked
+  {
+    background-color: #148F77;
+  }
+  
+  .alreadyLiked:hover
+  {
+    background-color: #f7f7f7;
   }

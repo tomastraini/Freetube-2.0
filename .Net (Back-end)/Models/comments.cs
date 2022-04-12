@@ -16,5 +16,6 @@ namespace REST.Models
         public int id_user { get; set; }
 
         public int id_video { get; set; }
+        public DateTime fecha_carga { get; set; }
     }
 }

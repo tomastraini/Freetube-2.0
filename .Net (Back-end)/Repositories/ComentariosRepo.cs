@@ -29,6 +29,7 @@ namespace REST.Repositories
                            id_comment = commens.id_comment,
                            comment = commens.comment,
                            usern = user.usern,
+                           fecha_carga = commens.fecha_carga
                        }).ToList();
             foreach(var r in res)
             {
@@ -37,6 +38,7 @@ namespace REST.Repositories
                     id_comment = r.id_comment,
                     comment = r.comment,
                     usern = r.usern,
+                    fecha_carga = r.fecha_carga
                 });
             };
 
@@ -51,7 +53,8 @@ namespace REST.Repositories
                             select new commentsDTO() {
                                 comment = com.comment,
                                 id_comment = com.id_comment,
-                                usern = user.usern
+                                usern = user.usern,
+                                fecha_carga = com.fecha_carga
                             }).ToList();
 
             return comments;
@@ -80,7 +83,8 @@ namespace REST.Repositories
                 {
                     id_video = comments.id_video,
                     id_user = comments.id_user,
-                    comment = comments.comment
+                    comment = comments.comment,
+                    fecha_carga = DateTime.Now
                 });
                 ctx.SaveChanges();
 

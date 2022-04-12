@@ -15,11 +15,13 @@ export class VideoWatchComponent implements OnInit {
   video: any;
   src: any;
   comments: any = [];
+  liked: any;
 
   ngOnInit(): void
   {
       this.id = this.router.url.split('/')[2];
       const newRoute = 'https://localhost:44375/api/videos/' + this.id;
+
       this.http.get(newRoute,
       {
         headers:
@@ -30,6 +32,26 @@ export class VideoWatchComponent implements OnInit {
           if (res){
             this.video = res;
             this.src = 'https://localhost:44375/api/videos/watch/?id=' + this.video.id_video;
+            if (sessionStorage.getItem('m') !== undefined && sessionStorage.getItem('m') !== null)
+            {
+              this.http.post('https://localhost:44375/api/Videos/getIfLiked',
+              {
+                id_video: this.video.id_video,
+                id_user: sessionStorage.getItem('m')
+              },
+              {
+                headers:
+                {
+                  Authorization: 'Bearer ' + sessionStorage.getItem('token')
+                }
+              }).subscribe(res => {
+                  this.liked = res;
+              });
+            }
+            else
+            {
+              this.liked = 3;
+            }
 
 
             this.http.get('https://localhost:44375/api/Comments/'  + this.id, {
@@ -42,6 +64,24 @@ export class VideoWatchComponent implements OnInit {
                     this.comments = res;
                     for(let i = 0; i < this.comments.length; i++){
                       this.comments[i].srcImage = 'https://localhost:44375/api/Users/imageID/' + this.comments[i].usern + '/' + false;
+                      const date = new Date(this.comments[i].fecha_carga);
+                      const now = new Date();
+                      const diff = now.getTime() - date.getTime();
+                      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                      const months = Math.floor(diff / (1000 * 60 * 60 * 24 * 30));
+                      const years = Math.floor(diff / (1000 * 60 * 60 * 24 * 30 * 12));
+                      if (years > 0){
+                        this.comments[i].fecha_diff = years + ' years ago';
+                      }
+                      else if (months > 0){
+                        this.comments[i].fecha_diff = months + ' months ago';
+                      }
+                      else if (days > 0){
+                        this.comments[i].fecha_diff = days + ' days ago';
+                      }
+                      else{
+                        this.comments[i].fecha_diff = 'today';
+                      }
                     }
                   }
             });

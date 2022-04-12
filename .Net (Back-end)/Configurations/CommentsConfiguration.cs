@@ -27,6 +27,9 @@ namespace Practise.Configurations
             entity.Property(e => e.id_video)
                 .HasColumnName("id_video");
 
+            entity.Property(e => e.fecha_carga)
+                            .HasColumnName("fecha_carga");
+
             OnConfigurePartial(entity);
         }
 
