@@ -9,6 +9,7 @@ It counts with:
 - SQL File to copy the exact same database in you DB Engine
 
 Back-end: LINQ, Entity Framework, .Net 5.0
+<br>
 Front-end: Angular 11, Materials
 
 <br>
