@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AppComponent } from 'src/app/app.component';
 
 @Component({
   selector: 'app-video-watch',
@@ -9,7 +10,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class VideoWatchComponent implements OnInit {
 
-  constructor(public route: ActivatedRoute, private http: HttpClient, public router: Router)
+  constructor(public route: ActivatedRoute, private http: HttpClient, public router: Router, private appComponent: AppComponent)
   {}
   id: any;
   video: any;
@@ -29,7 +30,7 @@ export class VideoWatchComponent implements OnInit {
   ngOnInit(): void
   {
       this.id = this.router.url.split('/')[2];
-      const newRoute = 'https://localhost:44375/api/videos/' + this.id;
+      const newRoute = this.appComponent.apiUrl + 'videos/' + this.id;
 
       this.http.get(newRoute,
       {
@@ -40,10 +41,10 @@ export class VideoWatchComponent implements OnInit {
       }).subscribe(res => {
           if (res){
             this.video = res;
-            this.src = 'https://localhost:44375/api/videos/watch/?id=' + this.video.id_video;
+            this.src = this.appComponent.apiUrl + 'videos/watch/?id=' + this.video.id_video;
             if (sessionStorage.getItem('m') !== undefined && sessionStorage.getItem('m') !== null)
             {
-              this.http.post('https://localhost:44375/api/Videos/getIfLiked',
+              this.http.post(this.appComponent.apiUrl + 'Videos/getIfLiked',
               {
                 id_video: this.video.id_video,
                 id_user: sessionStorage.getItem('m')
@@ -63,7 +64,7 @@ export class VideoWatchComponent implements OnInit {
             }
 
 
-            this.http.get('https://localhost:44375/api/Comments/'  + this.id, {
+            this.http.get(this.appComponent.apiUrl + 'Comments/'  + this.id, {
               headers: {
                 Authorization: 'Bearer ' + sessionStorage.getItem('token')
               }
@@ -72,8 +73,8 @@ export class VideoWatchComponent implements OnInit {
                 if (res){
                     this.comments = res;
                     for(let i = 0; i < this.comments.length; i++){
-                      this.comments[i].srcImage = 'https://localhost:44375/api/Users/imageID/' + this.comments[i].usern + '/' + false;
-                      this.http.post('https://localhost:44375/api/Users/id', {
+                      this.comments[i].srcImage = this.appComponent.apiUrl + 'Users/imageID/' + this.comments[i].usern + '/' + false;
+                      this.http.post(this.appComponent.apiUrl + 'Users/id', {
                         usern: this.comments[i].usern
                         }, {
                           headers: {
@@ -113,7 +114,7 @@ export class VideoWatchComponent implements OnInit {
   {
     if (sessionStorage.getItem('m') !== null && sessionStorage.getItem('m') !== undefined)
     {
-      const newRoute = 'https://localhost:44375/api/Comments';
+      const newRoute = this.appComponent.apiUrl + 'Comments';
       this.http.post(newRoute,
       {
         id_video: this.id,
@@ -146,7 +147,7 @@ export class VideoWatchComponent implements OnInit {
     {
       if (this.liked !== 1)
       {
-        this.http.post('https://localhost:44375/api/Videos/like',
+        this.http.post(this.appComponent.apiUrl + 'Videos/like',
         {
           id_video: this.id,
           id_user: sessionStorage.getItem('m'),
@@ -166,7 +167,7 @@ export class VideoWatchComponent implements OnInit {
       }
       else
       {
-        this.http.delete('https://localhost:44375/api/Videos/like?id_video=' + this.id + '&id_user=' + sessionStorage.getItem('m'),
+        this.http.delete(this.appComponent.apiUrl + 'Videos/like?id_video=' + this.id + '&id_user=' + sessionStorage.getItem('m'),
         {
           headers:
           {
@@ -191,7 +192,7 @@ export class VideoWatchComponent implements OnInit {
     {
       if (this.liked !== 0)
       {
-        this.http.post('https://localhost:44375/api/Videos/like',
+        this.http.post(this.appComponent.apiUrl + 'Videos/like',
         {
           id_video: this.id,
           id_user: sessionStorage.getItem('m'),
@@ -211,7 +212,7 @@ export class VideoWatchComponent implements OnInit {
       }
       else
       {
-        this.http.delete('https://localhost:44375/api/Videos/like?id_video=' + this.id + '&id_user=' + sessionStorage.getItem('m'),
+        this.http.delete(this.appComponent.apiUrl + 'Videos/like?id_video=' + this.id + '&id_user=' + sessionStorage.getItem('m'),
         {
           headers:
           {

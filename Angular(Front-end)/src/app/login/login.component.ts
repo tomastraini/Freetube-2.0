@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
+import { AppComponent } from '../app.component';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +12,7 @@ import { catchError, map } from 'rxjs/operators';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(public http: HttpClient, public router: Router) {  }
+  constructor(public http: HttpClient, public router: Router, private appComponent: AppComponent) {  }
 
   user: any;
   password: any;
@@ -31,7 +32,7 @@ export class LoginComponent implements OnInit {
   login(event: any): void
   {
 
-    this.http.post('https://localhost:44375/api/Users/login',
+    this.http.post(this.appComponent.apiUrl + 'Users/login',
     {
       usern: this.user,
       passwordu: this.password

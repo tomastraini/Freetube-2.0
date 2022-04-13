@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { Router } from '@angular/router';
+import { AppComponent } from 'src/app/app.component';
 
 @Component({
   selector: 'app-profile',
@@ -10,7 +11,7 @@ import { Router } from '@angular/router';
 })
 export class ProfileComponent implements OnInit {
 
-  constructor(private http: HttpClient, public router: Router) { }
+  constructor(private http: HttpClient, public router: Router, private appComponent: AppComponent) { }
 
   userImg: any;
   loggedIn: any;
@@ -35,8 +36,8 @@ export class ProfileComponent implements OnInit {
     {
       const id = this.router.url.split('/')[2];
       if (id === sessionStorage.getItem('m')) { this.permissionToDelete = true; }
-      this.userImg = 'https://localhost:44375/api/Users/imageID/' + id + '/' + false;
-      this.http.post('https://localhost:44375/api/Users/id', {usern: id},
+      this.userImg = this.appComponent.apiUrl + 'Users/imageID/' + id + '/' + false;
+      this.http.post(this.appComponent.apiUrl + 'Users/id', {usern: id},
       {
         observe: 'response',
         responseType: 'json',
@@ -47,7 +48,7 @@ export class ProfileComponent implements OnInit {
         this.userInfo = data.body;
         console.log(this.userInfo);
         this.userName = this.userInfo.usern;
-        this.http.get('https://localhost:44375/api/videos',
+        this.http.get(this.appComponent.apiUrl + 'videos',
       {
       headers: {
         Authorization: 'Bearer ' + sessionStorage.getItem('token')
@@ -70,9 +71,9 @@ export class ProfileComponent implements OnInit {
             }
             value.descriptionLength = value.description != null ? value.description.length : 0;
 
-            value.linksrc = 'https://localhost:44375/api/videos/watch/?id=' + value.id_video;
+            value.linksrc = this.appComponent.apiUrl + 'videos/watch/?id=' + value.id_video;
 
-            value.imglinksrc = 'https://localhost:44375/api/Users/imageID' + '/' + value.id_user + '/' + false;
+            value.imglinksrc = this.appComponent.apiUrl + 'Users/imageID' + '/' + value.id_user + '/' + false;
 
           });
         });

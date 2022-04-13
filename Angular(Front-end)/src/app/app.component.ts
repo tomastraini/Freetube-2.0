@@ -19,6 +19,7 @@ export class AppComponent implements OnDestroy, OnInit {
   busquedavalue: any;
   subscription: Subscription;
 
+  apiUrl = 'https://localhost:44375/api/';
   mensajerror: any;
 
   constructor(private http: HttpClient, private router: Router) {
@@ -38,7 +39,7 @@ export class AppComponent implements OnDestroy, OnInit {
     if ((sessionStorage.getItem('x') === null && sessionStorage.getItem('y') === null)
     || (sessionStorage.getItem('x') === 'user' && sessionStorage.getItem('y') === '123'))
     {
-      this.http.post('https://localhost:44375/api/Authentication/authentication', {
+      this.http.post(this.apiUrl + 'Authentication/authentication', {
             name: 'user',
             password: '123',
             userEnc: false,
@@ -62,7 +63,7 @@ export class AppComponent implements OnDestroy, OnInit {
     }
     else
     {
-      this.http.post('https://localhost:44375/api/Authentication/authentication', {
+      this.http.post(this.apiUrl + 'Authentication/authentication', {
             name: sessionStorage.getItem('x'),
             password: sessionStorage.getItem('y'),
             userEnc: true,

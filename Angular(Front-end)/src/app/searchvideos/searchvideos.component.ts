@@ -3,6 +3,7 @@ import { MenuComponent } from './menu/menu.component';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Route } from '@angular/compiler/src/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { AppComponent } from '../app.component';
 
 @Component({
   selector: 'app-searchvideos',
@@ -13,7 +14,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class SearchvideosComponent implements OnInit {
 
-  constructor(public route: ActivatedRoute, public router: Router, private http: HttpClient)
+  constructor(public route: ActivatedRoute, public router: Router, private http: HttpClient, private appComponent: AppComponent)
   {}
 
   title = 'Angular';
@@ -41,7 +42,7 @@ export class SearchvideosComponent implements OnInit {
 
     if (sessionStorage.getItem('m') !== undefined && sessionStorage.getItem('m') !== null)
     {
-      this.userImg = 'https://localhost:44375/api/Users/imageID/' + sessionStorage.getItem('m') + '/' + false;
+      this.userImg = this.appComponent.apiUrl + 'Users/imageID/' + sessionStorage.getItem('m') + '/' + false;
     }
     if (this.router.url.includes('/watch'))
     {
@@ -105,7 +106,7 @@ export class SearchvideosComponent implements OnInit {
         })
       };
       const username = sessionStorage.getItem('m');
-      this.http.post('https://localhost:44375/api/Videos?title=' + data.selectitle
+      this.http.post(this.appComponent.apiUrl + 'Videos?title=' + data.selectitle
       + '&description=' + data.selectDesc + '&id_user=' + username, formData, httpOptions).subscribe(
         (Response) => {
           window.location.reload();

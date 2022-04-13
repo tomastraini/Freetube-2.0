@@ -13,7 +13,7 @@ import { PageEvent} from '@angular/material/paginator';
   ]
 })
 export class MenuComponent implements OnInit {
-  constructor(private http: HttpClient, private app: AppComponent, private router: Router)
+  constructor(private http: HttpClient, private app: AppComponent, private router: Router, private appComponent: AppComponent)
   {
     if (sessionStorage.getItem('reload') !== null || sessionStorage.getItem('reload') !== undefined)
     {
@@ -49,7 +49,7 @@ export class MenuComponent implements OnInit {
       this.busquedavalue = searchvalue;
     }
 
-    this.http.get('https://localhost:44375/api/videos',
+    this.http.get(this.appComponent.apiUrl + 'videos',
       {
       headers: {
         Authorization: 'Bearer ' + sessionStorage.getItem('token')
@@ -71,9 +71,9 @@ export class MenuComponent implements OnInit {
             }
             value.descriptionLength = value.description != null ? value.description.length : 0;
 
-            value.linksrc = 'https://localhost:44375/api/videos/watch/?id=' + value.id_video;
+            value.linksrc = this.appComponent.apiUrl + 'videos/watch/?id=' + value.id_video;
 
-            value.imglinksrc = 'https://localhost:44375/api/Users/imageID' + '/' + value.id_user + '/' + false;
+            value.imglinksrc = this.appComponent.apiUrl + 'Users/imageID' + '/' + value.id_user + '/' + false;
 
           });
         });

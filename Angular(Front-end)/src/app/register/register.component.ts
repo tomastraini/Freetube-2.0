@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AppComponent } from '../app.component';
 
 @Component({
   selector: 'app-register',
@@ -9,7 +10,7 @@ import { Router } from '@angular/router';
 })
 export class RegisterComponent implements OnInit {
 
-  constructor(public router: Router, public http: HttpClient) { }
+  constructor(public router: Router, public http: HttpClient, private appComponent: AppComponent) { }
 
   imageSrc: any;
   file: any;
@@ -73,7 +74,7 @@ export class RegisterComponent implements OnInit {
       return;
     }
 
-    this.http.post('https://localhost:44375/api/Users?' +
+    this.http.post(this.appComponent.apiUrl + 'Users?' +
     'username=' + event.user.value + '&password=' + event.password.value + '&correo=' + event.correo.value + '&' +
     'nombreyapellido=' + event.nombreyapellido.value + '&telefono=' + event.telefono.value,
     this.imageSrc != null ? formData : null,
