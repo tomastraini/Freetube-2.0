@@ -1,5 +1,6 @@
 # Freetube-2.0
 Improved version of Fretube using C# ASP.Net and Angular 11
+<br>
 <b>The main menu:</b>
 
 ![alt text](https://github.com/tomastraini/Freetube-2.0/blob/main/Images/Menu.png?raw=true)
