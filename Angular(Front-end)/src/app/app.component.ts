@@ -25,16 +25,15 @@ export class AppComponent implements OnDestroy, OnInit {
   constructor(private http: HttpClient, private router: Router) {
     this.subscription = this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
-        sessionStorage.removeItem("reload")
+        sessionStorage.removeItem('reload');
       }
     });
   }
 
   ngOnDestroy(): void {
-    
   }
 
-  ngOnInit()
+  ngOnInit(): void
   {
     if ((sessionStorage.getItem('x') === null && sessionStorage.getItem('y') === null)
     || (sessionStorage.getItem('x') === 'user' && sessionStorage.getItem('y') === '123'))

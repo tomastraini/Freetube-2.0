@@ -120,5 +120,18 @@ namespace REST.Controladores
             videosService.deleteLike(like);
             return Ok();
         }
+
+        [HttpPost("view")]
+        public ActionResult AddViews(int id_video, int id_user)
+        {
+            videosService.AddViews(id_video, id_user);
+            return Ok();
+        }
+
+        [HttpGet("top")]
+        public ActionResult ListTopVideos()
+        {
+            return Ok(videosService.ListTopVideos());
+        }
     }
 }

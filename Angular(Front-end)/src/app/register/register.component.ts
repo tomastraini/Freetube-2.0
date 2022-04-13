@@ -20,7 +20,7 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit(): void
   {
-    if (sessionStorage.getItem("m") !== null && sessionStorage.getItem("m") !== undefined)
+    if (sessionStorage.getItem('m') !== null && sessionStorage.getItem('m') !== undefined)
     {
       window.location.href = '/';
     }

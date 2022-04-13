@@ -21,6 +21,7 @@ namespace REST.Servicios.Interfaces
         public void likeVideo(likes like);
         public int getIfLiked(likes like);
         public void deleteLike(likes like);
-
+        public void AddViews(int id_video, int id_user);
+        List<videosDTO> ListTopVideos();
     }
 }

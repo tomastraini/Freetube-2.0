@@ -12,8 +12,9 @@ namespace REST.DTOs
         public string title { get; set; }
         public string description { get; set; }
         public string usern { get; set; }
-        public int likes { get; set; }
-        public int dislikes { get; set; }
+        public long likes { get; set; }
+        public long dislikes { get; set; }
+        public long views { get; set; }
         public int id_user { get; set; }
     }
 }

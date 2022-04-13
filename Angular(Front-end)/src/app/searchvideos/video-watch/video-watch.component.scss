@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;700&display=swap');
 
-video
+.videoViewer
 {
     background-color: black;
     position: relative;
@@ -11,8 +11,26 @@ video
     max-height: 337.5px;
     border: 1px solid black;
     border-radius: 5px;
-    
 }
+
+.recommendedVideos
+{
+  cursor: pointer;
+}
+
+.recommendedVideosViews
+{
+    background-color: black;
+    margin-left: 5%;
+    position: relative;
+    max-width: 600px;
+    max-height: 337.5px;
+    border: 1px solid black;
+    border-radius: 5px;
+    height: 200px;
+    width: 400px;
+}
+
 .title
 {
     font-family: 'Open Sans', sans-serif;
@@ -196,3 +214,103 @@ video
   {
     background-color: #f7f7f7;
   }
+
+  .vidList
+  {
+    position: relative;
+    margin-left: 68%;
+    margin-top: 1%;
+    background-color: #212121;
+  }
+
+  .mainRecommendedTitle
+  {
+    font-family: 'Open Sans', sans-serif;
+    font-size: large;
+    text-align: center;
+    margin-top: 1%;
+  }
+
+  .theRest
+  {
+    margin-top: -184%;
+    margin-bottom: 50%;
+  }
+
+  .commentZero
+  {
+    margin-bottom: 125%;
+  }
+
+  .oneComment
+  {
+    margin-bottom: 128%;
+  }
+
+  .twoComment
+  {
+    margin-bottom: 130%;
+  }
+
+  .others
+  {
+    margin-bottom: 120%;
+  }
+
+  .others2
+  {
+    margin-bottom: 100%;
+  }
+
+  .vidUser
+{
+  z-index: 1;
+  display: flex;
+  margin-bottom: 5%;
+}
+
+.vidUser:hover
+{
+  z-index: 1;
+  display: flex;
+  margin-bottom: 5%;
+}
+
+
+.vidUserText
+{
+  margin-left: 3.5%;
+  margin-bottom: 5%;
+  font-size: large;
+}
+
+.vidUserIMG
+{
+  margin-top: -5%;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-left: 3%;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.vidUserIMG:hover
+{
+  transform: scale(1.1);
+  transition: all 0.5s ease-in-out;
+  z-index: 1;
+
+}
+
+.vidTitle
+{
+  font-family: 'Open Sans', sans-serif;
+  font-size: large;
+  margin-left: 20%;
+}
+
+.matGrid
+{
+  margin-top: 3%;
+}

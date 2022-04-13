@@ -6,14 +6,14 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class TableFilterPipe implements PipeTransform {
 
   transform(li: any[], value: string): any {
-   return value !== undefined && li !== undefined ? li.filter(li =>
-        li.title.indexOf(value) !== -1 ||
+   return value !== undefined && li !== undefined ? li.filter(val =>
+      val.title.indexOf(value) !== -1 ||
 
-        li.description.indexOf(value) !== -1 ||
+      val.description.indexOf(value) !== -1 ||
 
-        li.title.toLowerCase().indexOf(value.toLowerCase()) !== -1 ||
+      val.title.toLowerCase().indexOf(value.toLowerCase()) !== -1 ||
 
-        li.description.toLowerCase().indexOf(value.toLowerCase()) !== -1
+      val.description.toLowerCase().indexOf(value.toLowerCase()) !== -1
     ) : li;
   }
 }

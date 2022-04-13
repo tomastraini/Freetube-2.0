@@ -107,5 +107,4 @@ export class ProfileComponent implements OnInit {
       window.open('/watch/' + video.id_video, '_blank');
     }
   }
-  
 }

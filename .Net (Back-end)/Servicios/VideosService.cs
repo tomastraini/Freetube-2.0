@@ -58,6 +58,7 @@ namespace REST.Servicios
             return repo.ListVideos();
         }
 
+
         public videos OnPostUploadAsync(IFormFile files, string title, string description, int id_user, string filePath)
         {
             var ext = Path.GetExtension(files.FileName);
@@ -130,6 +131,15 @@ namespace REST.Servicios
         public void deleteLike(likes like)
         {
             repo.deleteLike(like);
+        }
+
+        public void AddViews(int id_video, int id_user)
+        {
+            repo.AddViews(id_video, id_user);
+        }
+        public List<videosDTO> ListTopVideos()
+        {
+            return repo.ListTopVideos();
         }
     }
 }

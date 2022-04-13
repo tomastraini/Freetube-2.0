@@ -61,10 +61,12 @@ namespace REST.Repositories
                             }).ToList();
             var likeTable = (from lik in contexto.likes
                              select lik);
-
+            var views = (from view in contexto.views
+                         select view).ToList();
             response.ForEach(r => {
                 r.likes = likeTable.Where(lt => lt.id_video == r.id_video && lt.liked == true).Count();
                 r.dislikes = likeTable.Where(lt => lt.id_video == r.id_video && lt.liked == false).Count();
+                r.views = views.Where(v => v.id_video == r.id_video).Count();
             });
 
             return response;
@@ -94,12 +96,16 @@ namespace REST.Repositories
             if(query == null) { return null; }
             var likeTable = (from lik in contexto.likes
                              select lik);
+            var views = (from view in contexto.views
+                         where view.id_video == query.id_video
+                         select view).Count();
             var response = new videosDTO()
             {
                 id_video = query.id_video,
                 description = query.description,
                 likes = likeTable.Where(lt => lt.id_video == query.id_video && lt.liked == true).Count(),
                 dislikes = likeTable.Where(lt => lt.id_video == query.id_video && lt.liked == false).Count(),
+                views = views,
                 id_user = query.id_user,
                 title = query.title,
                 usern = query.id_user.ToString()
@@ -190,6 +196,49 @@ namespace REST.Repositories
                 exists.liked = like.liked;
                 contexto.SaveChanges();
             }
+        }
+
+        public void AddViews(int id_video, int id_user)
+        {
+            var views = new viewedVideos()
+            {
+                id_user = id_user,
+                id_video = id_video
+            };
+            contexto.views.Add(views);
+            contexto.SaveChanges();
+        }
+
+        public List<videosDTO> ListTopVideos()
+        {
+            var response = (from vid in contexto.Videos
+                            join us in contexto.users on vid.id_user equals us.id_user
+                            select new videosDTO()
+                            {
+                                id_video = vid.id_video,
+                                description = vid.description,
+                                id_user = vid.id_user,
+                                paths = vid.paths,
+                                title = vid.title,
+                                usern = us.usern
+                            }).ToList();
+            var likeTable = (from lik in contexto.likes
+                             select lik);
+            var views = (from view in contexto.views
+                         select view).ToList();
+            response.ForEach(r => {
+                r.likes = likeTable.Where(lt => lt.id_video == r.id_video && lt.liked == true).Count();
+                r.dislikes = likeTable.Where(lt => lt.id_video == r.id_video && lt.liked == false).Count();
+                r.views = views.Where(v => v.id_video == r.id_video).Count();
+            });
+
+            response = response.OrderByDescending(r => r.views).ToList();
+            response = response.OrderByDescending(r => r.likes).ToList();
+            
+            response = response.Take(8).ToList();
+
+
+            return response;
         }
     }
 }

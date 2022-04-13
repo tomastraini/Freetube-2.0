@@ -10,7 +10,7 @@ export class AuthInterceptor implements HttpInterceptor {
 
         request = request.clone({
             setHeaders: {
-                Authorization: `Bearer ` + sessionStorage.getItem('token');
+                Authorization: `Bearer ` + sessionStorage.getItem('token')
             }
         });
 

@@ -19,6 +19,9 @@ export class VideoWatchComponent implements OnInit {
   liked: any;
   users: any;
 
+  videosOriginal: any;
+  videos: any;
+
   reload(): void
   {
     const actualroute = this.router.url;
@@ -54,8 +57,8 @@ export class VideoWatchComponent implements OnInit {
                 {
                   Authorization: 'Bearer ' + sessionStorage.getItem('token')
                 }
-              }).subscribe(res => {
-                  this.liked = res;
+              }).subscribe(res2 => {
+                  this.liked = res2;
               });
             }
             else
@@ -69,10 +72,10 @@ export class VideoWatchComponent implements OnInit {
                 Authorization: 'Bearer ' + sessionStorage.getItem('token')
               }
             })
-              .subscribe(res => {
-                if (res){
-                    this.comments = res;
-                    for(let i = 0; i < this.comments.length; i++){
+              .subscribe(res3 => {
+                if (res3){
+                    this.comments = res3;
+                    for (let i = 0; i < this.comments.length; i++){
                       this.comments[i].srcImage = this.appComponent.apiUrl + 'Users/imageID/' + this.comments[i].usern + '/' + false;
                       this.http.post(this.appComponent.apiUrl + 'Users/id', {
                         usern: this.comments[i].usern
@@ -108,6 +111,34 @@ export class VideoWatchComponent implements OnInit {
             });
           }
       });
+
+      this.http.get(this.appComponent.apiUrl + 'videos/top',
+      {
+      headers: {
+        Authorization: 'Bearer ' + sessionStorage.getItem('token')
+        }
+      }
+        )
+      .subscribe(
+        (Response) =>
+        {
+          this.videosOriginal = Response;
+          this.videos = Response;
+          console.log(this.videos);
+          this.videosOriginal.forEach((value: any) =>
+          {
+            if (value.description == null)
+            {
+              value.description = '';
+            }
+            value.descriptionLength = value.description != null ? value.description.length : 0;
+
+            value.linksrc = this.appComponent.apiUrl + 'videos/watch/?id=' + value.id_video;
+
+            value.imglinksrc = this.appComponent.apiUrl + 'Users/imageID' + '/' + value.id_user + '/' + false;
+
+          });
+        });
   }
 
   submitComment(event: any): void
@@ -138,6 +169,18 @@ export class VideoWatchComponent implements OnInit {
     else
     {
       this.router.navigate(['/login']);
+    }
+  }
+
+  openVid($event: any, video: any): void
+  {
+    if ($event.type === 'click')
+    {
+      window.location.href = '/watch/' + video.id_video;
+    }
+    else if ($event.type === 'auxclick')
+    {
+      window.open('/watch/' + video.id_video, '_blank');
     }
   }
 
@@ -233,6 +276,11 @@ export class VideoWatchComponent implements OnInit {
   }
 
   showProfile(id: any): void
+  {
+    window.location.href = '/profile/' + id;
+  }
+
+  openProfile(id: any): void
   {
     window.location.href = '/profile/' + id;
   }
