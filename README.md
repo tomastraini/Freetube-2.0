@@ -3,8 +3,8 @@ Improved version of Fretube using C# ASP.Net and Angular 11
 It counts with:
 - Videos upload
 - User login and register
-- Secured information, JWT and token for authentications and authorizations
-- API REST that supports media and JSON upload
+- Secured information (Encrypted and hashed), JWT and token for authentications and authorizations (Bearer token)
+- API REST that supports multimedia and JSON upload
 - Searching bar, connected with filtering pipes
 - SQL File to copy the exact same database in you DB Engine
 
