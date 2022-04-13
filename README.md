@@ -1,5 +1,16 @@
 # Freetube-2.0
 Improved version of Fretube using C# ASP.Net and Angular 11
+It counts with:
+- Videos upload
+- User login and register
+- Secured information, JWT and token for authentications and authorizations
+- API REST that supports media and JSON upload
+- Searching bar, connected with filtering pipes
+- SQL File to copy the exact same database in you DB Engine
+
+Back-end: LINQ, Entity Framework, .Net 5.0
+Front-end: Angular 11, Materials
+
 <br>
 <b>The main menu:</b>
 
