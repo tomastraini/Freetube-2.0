@@ -135,11 +135,12 @@ export class SearchvideosComponent implements OnInit {
   {
     sessionStorage.setItem('x', 'user');
     sessionStorage.setItem('y', '123');
+    sessionStorage.removeItem('m');
     window.location.reload();
   }
 
   goToProfile(): void
   {
-    window.location.href = '/profile';
+    window.location.href = '/profile/' + sessionStorage.getItem('m');
   }
 }

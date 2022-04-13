@@ -104,9 +104,15 @@ export class MenuComponent implements OnInit {
     {
       window.location.href = '/watch/' + video.id_video;
     }
-    else if($event.type === 'auxclick')
+    else if ($event.type === 'auxclick')
     {
       window.open('/watch/' + video.id_video, '_blank');
     }
   }
+
+  openProfile(id: any): void
+  {
+    window.location.href = '/profile/' + id;
+  }
+
 }

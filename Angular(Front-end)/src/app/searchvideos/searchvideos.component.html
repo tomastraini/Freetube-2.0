@@ -117,4 +117,4 @@
 
 <app-about class="about" *ngIf="view == 'about'"></app-about>
 
-<app-profile class="profile" *ngIf="view == 'profile'"></app-profile>
+<app-profile class="profile" [busquedavalue]="busquedavalue" *ngIf="view == 'profile'"></app-profile>

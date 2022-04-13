@@ -15,17 +15,15 @@
         {{ video.title }}
       </h3>
 
-      <div class="vidUser">
-        <img class="vidUserIMG" [attr.src]="video.imglinksrc | secure | async">
-
+      <div class="vidUser" (click)="openProfile(video.id_user)">
+        <img class="vidUserIMG" [attr.src]="video.imglinksrc | secure | async" >
+  
         <p  class="text-light text-start ml-5 vidUserText">
           {{ video.usern }}
         </p>
       </div>
-
-      
-
     </div>
+
   </mat-grid-tile>
 </mat-grid-list>
 

@@ -16,6 +16,7 @@ export class VideoWatchComponent implements OnInit {
   src: any;
   comments: any = [];
   liked: any;
+  users: any;
 
   reload(): void
   {
@@ -72,6 +73,17 @@ export class VideoWatchComponent implements OnInit {
                     this.comments = res;
                     for(let i = 0; i < this.comments.length; i++){
                       this.comments[i].srcImage = 'https://localhost:44375/api/Users/imageID/' + this.comments[i].usern + '/' + false;
+                      this.http.post('https://localhost:44375/api/Users/id', {
+                        usern: this.comments[i].usern
+                        }, {
+                          headers: {
+                            Authorization: 'Bearer ' + sessionStorage.getItem('token')
+                          }
+                        }).subscribe(res2 => {
+                            this.users = res2;
+                            this.comments[i].id_user = this.users.id_user;
+                        });
+
                       const date = new Date(this.comments[i].fecha_carga);
                       const now = new Date();
                       const diff = now.getTime() - date.getTime();
@@ -146,6 +158,8 @@ export class VideoWatchComponent implements OnInit {
             Authorization: 'Bearer ' + sessionStorage.getItem('token')
           }
         }).subscribe(res => {
+              this.video.likes += 1;
+              if (this.liked === 0) { this.video.dislikes -= 1; }
               this.liked = 1;
               this.reload();
         });
@@ -160,6 +174,7 @@ export class VideoWatchComponent implements OnInit {
           }
         }).subscribe(res => {
               this.liked = 3;
+              this.video.likes -= 1;
               this.reload();
         });
       }
@@ -188,6 +203,8 @@ export class VideoWatchComponent implements OnInit {
             Authorization: 'Bearer ' + sessionStorage.getItem('token')
           }
         }).subscribe(res => {
+              this.video.dislikes += 1;
+              if (this.liked === 1) { this.video.likes -= 1; }
               this.liked = 0;
               this.reload();
         });
@@ -202,6 +219,7 @@ export class VideoWatchComponent implements OnInit {
           }
         }).subscribe(res => {
               this.liked = 3;
+              this.video.dislikes -= 1;
               this.reload();
         });
       }
@@ -213,4 +231,8 @@ export class VideoWatchComponent implements OnInit {
     }
   }
 
+  showProfile(id: any): void
+  {
+    window.location.href = '/profile/' + id;
+  }
 }

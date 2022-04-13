@@ -17,3 +17,116 @@
 {
     text-align: center;
 }
+
+.bg-dark
+{
+  cursor: pointer;
+}
+
+.mat-tooltip
+{
+  top: 104px;
+}
+.pagination {
+  display: inline-block;
+}
+
+.pagination a {
+  color: black;
+  float: center;
+  padding: 8px 16px;
+  text-decoration: none;
+}
+
+
+.vidBackground:hover
+{
+  background-color: #f1f1f1;
+  opacity: 0.8;
+  filter: alpha(opacity=80);
+  cursor: pointer;
+  z-index: 1;
+}
+
+video:hover
+{
+  transform: scale(1.1);
+  transition: all 0.5s ease-in-out;
+  z-index: 2;
+}
+
+video
+{
+  object-fit: fill;
+  max-width: 300px;
+  max-height: 150px;
+}
+
+p
+{
+  font-family: 'Open Sans', sans-serif;
+}
+
+.vidUser
+{
+  display: flex;
+  margin-bottom: 5%;
+}
+
+.vidUserText
+{
+  margin-left: 3.5%;
+  margin-bottom: 5%;
+  font-size: large;
+}
+
+.vidUserIMG
+{
+  margin-top: -10%;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+.vidTitle
+{
+  font-family: 'Open Sans', sans-serif;
+  font-size: large;
+  margin-left: 20%;
+}
+
+.matGrid
+{
+  margin-top: 3%;
+}
+
+
+.btnTrash
+{
+  z-index: 1;
+  margin-left: -11%;
+  margin-bottom: -45%;
+}
+
+.btnCancel
+{
+  font-family: 'Open Sans', sans-serif;
+  margin-right: 60%;
+}
+
+.btnConfirm
+{
+  font-family: 'Open Sans', sans-serif;
+}
+
+.filler
+{
+  height: 500px;
+}
+
+.titleAsk
+{
+  font-family: 'Open Sans', sans-serif;
+  font-size: large;
+  margin-left: 20%;
+}

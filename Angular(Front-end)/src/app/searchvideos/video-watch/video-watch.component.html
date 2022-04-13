@@ -16,11 +16,13 @@
       </p>
     <hr class="description-div">  
       <div class="buttonsLikes">
+        <a> {{ video.likes }} </a>
         <button [class.like]="liked !== 1" [class.alreadyLiked]="liked === 1" class="btn btn-dark" (click)="like()">
           Like
           <i class="fa fa-thumbs-up" aria-hidden="true"></i>
         </button>
-        
+
+        <a> {{ video.dislikes }} </a>
         <button [class.dislike]="liked !== 0" [class.alreadyDisliked]="liked === 0" class="btn btn-dark" (click)="dislike()">
           Dislike
           <i class="fa fa-thumbs-down" aria-hidden="true"></i>
@@ -49,7 +51,7 @@
 
 <div>
   <div class="comment" *ngFor="let comment of comments">
-    <div class ="profile-image">
+    <div class ="profile-image" (click)="showProfile(comment.id_user)">
       <img class="profile-image-img" [attr.src]="comment.srcImage | secure | async">
     </div>
     <div class ="username">{{ comment.usern }}</div>
@@ -58,5 +60,5 @@
       <div style ="clear:both;"></div>
       <span>{{ comment.fecha_diff }}</span>
     </div>
-</div> 
+  </div> 
 </div>

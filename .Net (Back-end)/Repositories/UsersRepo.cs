@@ -152,6 +152,7 @@ namespace REST.Repositories
                                 where users.id_user == num
                                 select new UsersDTO()
                                 {
+                                    id_user = users.id_user,
                                     usern = users.usern,
                                     passwordu = users.passwordu,
                                     rol = rol.nombre_rol
@@ -166,6 +167,7 @@ namespace REST.Repositories
                                 where users.usern == id
                                 select new UsersDTO()
                                 {
+                                    id_user = users.id_user,
                                     usern = users.usern,
                                     passwordu = users.passwordu,
                                     rol = rol.nombre_rol

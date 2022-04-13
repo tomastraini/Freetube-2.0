@@ -25,14 +25,18 @@
   opacity: 0.8;
   filter: alpha(opacity=80);
   cursor: pointer;
-  z-index: 1;
+  z-index: auto;
+}
+
+.vidBackground
+{
+  z-index: auto;
 }
 
 video:hover
 {
   transform: scale(1.1);
   transition: all 0.5s ease-in-out;
-  z-index: 2;
 }
 
 video
@@ -49,9 +53,18 @@ p
 
 .vidUser
 {
+  z-index: 1;
   display: flex;
   margin-bottom: 5%;
 }
+
+.vidUser:hover
+{
+  z-index: 1;
+  display: flex;
+  margin-bottom: 5%;
+}
+
 
 .vidUserText
 {
@@ -66,6 +79,15 @@ p
   width: 50px;
   height: 50px;
   border-radius: 50%;
+  z-index: 1;
+}
+
+.vidUserIMG:hover
+{
+  transform: scale(1.1);
+  transition: all 0.5s ease-in-out;
+  z-index: 1;
+
 }
 
 .vidTitle
@@ -102,6 +124,3 @@ p
     }
   }
 }
-
-
-
