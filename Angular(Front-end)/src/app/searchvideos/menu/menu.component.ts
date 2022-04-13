@@ -21,11 +21,6 @@ export class MenuComponent implements OnInit {
     }
   }
 
-  breakpoint = 6;
-  length = 0;
-  pageSize = 6;
-  pageSizeOptions = [6];
-
   videos: any;
   videosOriginal: any;
   comments: any;
@@ -34,6 +29,8 @@ export class MenuComponent implements OnInit {
   videoElement: any;
   mover = 0;
   @Input() busquedavalue: any;
+
+  amountSliced = 8;
 
   reload(): void
   {
@@ -51,9 +48,6 @@ export class MenuComponent implements OnInit {
       const searchvalue = this.router.url.split('/')[2];
       this.busquedavalue = searchvalue;
     }
-    this.breakpoint = (window.innerWidth <= 400) ? 1 : 6;
-
-
 
     this.http.get('https://localhost:44375/api/videos',
       {
@@ -67,6 +61,7 @@ export class MenuComponent implements OnInit {
         {
           this.videosOriginal = Response;
           this.videos = Response;
+          this.videos = this.videos.slice(0, this.amountSliced);
           console.log(this.videos);
           this.videosOriginal.forEach((value: any) =>
           {
@@ -82,20 +77,6 @@ export class MenuComponent implements OnInit {
 
           });
         });
-  }
-
-  OnPageChange(event: PageEvent): void{
-    const startIndex = event.pageIndex * event.pageSize;
-    let endIndex = startIndex + event.pageSize + 3;
-    if (endIndex > this.length){
-      endIndex = this.length;
-    }
-    this.videos = this.videosOriginal;
-    this.videos = this.videos.slice(startIndex, endIndex);
-  }
-  onResize(event: any): void
-  {
-    this.breakpoint = (event.target.innerWidth <= 400) ? 1 : 6;
   }
 
   openVid($event: any, video: any): void
@@ -115,4 +96,19 @@ export class MenuComponent implements OnInit {
     window.location.href = '/profile/' + id;
   }
 
+  expandView(): void
+  {
+    if (this.amountSliced + 8 < this.videosOriginal.length)
+    {
+      this.amountSliced += 8;
+      this.videos = this.videosOriginal.slice(0, this.amountSliced);
+      this.reload();
+    }
+    else
+    {
+      this.amountSliced = this.videosOriginal.length;
+      this.videos = this.videosOriginal;
+      this.reload();
+    }
+  }
 }

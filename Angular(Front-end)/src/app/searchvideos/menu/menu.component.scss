@@ -33,11 +33,7 @@
   z-index: auto;
 }
 
-video:hover
-{
-  transform: scale(1.1);
-  transition: all 0.5s ease-in-out;
-}
+
 
 video
 {
@@ -123,4 +119,10 @@ p
       max-height: 30px;
     }
   }
+}
+
+.centerViewMore
+{
+  margin-left: 50%;
+  margin-top: auto;
 }

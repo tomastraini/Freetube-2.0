@@ -1,5 +1,5 @@
 
-<mat-grid-list cols="4" rowHeight="1.5:1" class="matGrid" (window:resize)="onResize($event)">
+<mat-grid-list cols="4" rowHeight="1.5:1" class="matGrid">
   <mat-grid-tile *ngFor="let video of videos | tableFilter: busquedavalue">
     <div class="vidBackground" (click)="openVid($event, video)" (auxclick)="openVid($event, video)">
 
@@ -27,7 +27,6 @@
   </mat-grid-tile>
 </mat-grid-list>
 
-<mat-paginator [length]="length"
-[pageSize]="pageSize"
-(page)="OnPageChange($event)" style-paginator showFirstLastButtons  >
-</mat-paginator>
+<button *ngIf="videosOriginal !== null && videosOriginal.length > 8 && !(amountSliced === videosOriginal.length)" (click)="expandView()"
+  class="btn btn-dark centerViewMore"> Ver más <i class="fa fa-arrow-down" aria-hidden="true"></i> </button>
+
