@@ -1,8 +1,10 @@
 <div class="sutileBackground">
     <img class="profile-image-img" [attr.src]="userImg | secure | async" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
     <h1 class="userName">{{ userName }}</h1>
+    <button type="button"  class="btn btn-danger modifyProfile"> 
+      <i class="fa fa-pencil" aria-hidden="true"></i>
+    </button>
 </div>
-
 <hr>
 
 <mat-grid-list cols="4" rowHeight="1.5:1" class="matGrid" (window:resize)="onResize($event)">
@@ -29,19 +31,20 @@
           </p>
         </div>
       </div>
-      <button type="button" *ngIf="permissionToDelete" class="btn btn-danger btnTrash" data-bs-toggle="modal" data-bs-target="#BorrarVideoModal"> <i class="fa fa-trash" aria-hidden="true"></i> </button>
+      <button type="button" *ngIf="permissionToDelete" class="btn btn-danger btnTrash" 
+      data-bs-toggle="modal" data-bs-target="#BorrarVideoModal" 
+      (click)="selectedVideoDelete(video.id_video)"> <i class="fa fa-trash" aria-hidden="true"></i> </button>
     </mat-grid-tile>
   </mat-grid-list>
   
-  <mat-paginator [length]="length"
-  [pageSize]="pageSize"
-  (page)="OnPageChange($event)" style-paginator showFirstLastButtons  >
-  </mat-paginator>
-
-
   <div *ngIf="permissionToDelete" class="modal fade mt-5 float-center" id="BorrarVideoModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
+
+        <div>
+          <p [(ngModel)]="vidToDelete" (value)="vidToDelete">
+          </p>
+        </div>
 
         <div class="modal-header">
           <h5 class="modal-title titleAsk" id="exampleModalLabel">Seguro que quiere borrar el video?</h5>
@@ -53,7 +56,7 @@
 
         <div class="modal-footer">
           <button type="button" data-bs-dismiss="modal" class="btn btn-dark btnCancel" aria-label="Close"> Cancelar </button>
-          <button type="submit" class="btn btn-danger btnConfirm"> Eliminar </button>
+          <button type="submit" class="btn btn-danger btnConfirm" (click)="deleteVideo()"> Eliminar </button>
         </div>
       </div>
     </div>

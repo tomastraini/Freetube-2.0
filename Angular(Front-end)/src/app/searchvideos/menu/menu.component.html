@@ -1,32 +1,35 @@
-
-<mat-grid-list cols="4" rowHeight="1.5:1" class="matGrid">
-  <mat-grid-tile *ngFor="let video of videos | tableFilter: busquedavalue">
-    <div class="vidBackground" (click)="openVid($event, video)" (auxclick)="openVid($event, video)">
-
-      <video height="200" width="400" class="ml-2 mt-3" 
-      [attr.src]="video.linksrc | secure | async">
-      </video>
-
-      <h3 class="header" class="vidTitle text-light text-start ml-5" style="text-decoration: none" *ngIf="video.title.length > 24">
-        {{ video.title?.substring(0,22) }}
-      </h3>
-
-      <h3 class="header" class="vidTitle text-light text-start ml-5" style="text-decoration: none" *ngIf="video.title.length <= 24">
-        {{ video.title }}
-      </h3>
-
-      <div class="vidUser" (click)="openProfile(video.id_user)">
-        <img class="vidUserIMG" [attr.src]="video.imglinksrc | secure | async" >
+<div *ngIf="videosOriginal">
+  <mat-grid-list cols="4" rowHeight="1.5:1" class="matGrid">
+    <mat-grid-tile *ngFor="let video of videos | tableFilter: busquedavalue">
+      
+      <div class="vidBackground" (click)="openVid($event, video)" (auxclick)="openVid($event, video)">
   
-        <p  class="text-light text-start ml-5 vidUserText">
-          {{ video.usern }}
-        </p>
+        <video height="200" width="400" class="ml-2 mt-3" 
+        [attr.src]="video.linksrc | secure | async">
+        </video>
+  
+        <h3 class="header" class="vidTitle text-light text-start ml-5" style="text-decoration: none" *ngIf="video.title.length > 24">
+          {{ video.title?.substring(0,22) }}
+        </h3>
+  
+        <h3 class="header" class="vidTitle text-light text-start ml-5" style="text-decoration: none" *ngIf="video.title.length <= 24">
+          {{ video.title }}
+        </h3>
+  
+        <div class="vidUser" (click)="openProfile(video.id_user)">
+          <img class="vidUserIMG" [attr.src]="video.imglinksrc | secure | async" >
+    
+          <p  class="text-light text-start ml-5 vidUserText">
+            {{ video.usern }}
+          </p>
+        </div>
       </div>
-    </div>
+  
+    </mat-grid-tile>
+  </mat-grid-list>
+  
+  <button *ngIf="videosOriginal !== null && videosOriginal.length > 8 && !(amountSliced === videosOriginal.length)" (click)="expandView()"
+    class="btn btn-dark centerViewMore"> Ver más <i class="fa fa-arrow-down" aria-hidden="true"></i> </button>
+</div>
 
-  </mat-grid-tile>
-</mat-grid-list>
-
-<button *ngIf="videosOriginal !== null && videosOriginal.length > 8 && !(amountSliced === videosOriginal.length)" (click)="expandView()"
-  class="btn btn-dark centerViewMore"> Ver más <i class="fa fa-arrow-down" aria-hidden="true"></i> </button>
 

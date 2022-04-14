@@ -10,6 +10,7 @@
 
 .sutileBackground
 {
+    overflow-x: hidden;
     background-color: #f7f7f7;
 }
 
@@ -129,4 +130,10 @@ p
   font-family: 'Open Sans', sans-serif;
   font-size: large;
   margin-left: 20%;
+}
+
+.modifyProfile
+{
+  margin-left: 55%;
+  margin-top: -6%;
 }

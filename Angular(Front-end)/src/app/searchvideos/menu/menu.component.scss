@@ -25,12 +25,12 @@
   opacity: 0.8;
   filter: alpha(opacity=80);
   cursor: pointer;
-  z-index: auto;
+  z-index: 1;
 }
 
 .vidBackground
 {
-  z-index: auto;
+  z-index: 1;
 }
 
 

@@ -42,6 +42,8 @@ namespace REST.Repositories
                 });
             };
 
+            DTO.OrderByDescending(x => x.fecha_carga);
+
             return DTO;
         }
 
@@ -57,6 +59,7 @@ namespace REST.Repositories
                                 fecha_carga = com.fecha_carga
                             }).ToList();
 
+            comments.OrderByDescending(x => x.fecha_carga);
             return comments;
         }
 

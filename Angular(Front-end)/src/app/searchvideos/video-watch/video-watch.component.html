@@ -23,7 +23,15 @@
 </div>
 
 
-<div class="theRest">
+<div [class.theRest1]="videos != null && videos.length === 1"
+  [class.theRest2]="videos != null && videos.length === 2"
+  [class.theRest3]="videos != null && videos.length === 3"
+  [class.theRest4]="videos != null && videos.length === 4"
+  [class.theRest5]="videos != null && videos.length === 5"
+  [class.theRest6]="videos != null && videos.length === 6"
+  [class.theRest7]="videos != null && videos.length === 7"
+  [class.theRest8]="videos != null && videos.length === 8"
+  >
   <div class="videoContainerforView" id="videoContainerforView">
     <video id="videoViewer"
     class="videoViewer"  [attr.src]="src | secure | async" 
@@ -38,24 +46,36 @@
     <hr class="description-div">
 
     <div class="inlineDescriptionAndButtons">
-      <p class="description">
-        {{ video.description }}
-      </p>
-    <hr class="description-div">  
       <div class="buttonsLikes">
-        <a> {{ video.likes }} </a>
+        <a> {{ video.views }} vistas </a>
         <button [class.like]="liked !== 1" [class.alreadyLiked]="liked === 1" class="btn btn-dark" (click)="like()">
-          Like
           <i class="fa fa-thumbs-up" aria-hidden="true"></i>
         </button>
+        <a> {{ video.likes }} </a>
 
-        <a> {{ video.dislikes }} </a>
         <button [class.dislike]="liked !== 0" [class.alreadyDisliked]="liked === 0" class="btn btn-dark" (click)="dislike()">
-          Dislike
           <i class="fa fa-thumbs-down" aria-hidden="true"></i>
         </button>
+        <a> {{ video.dislikes }} </a>
       </div>
-    </div>
+
+      <div class="separator">Usuario</div>
+      <div class ="profileImageFullVideo" (click)="showProfile(video.id_user)">
+        <img class="profile-image-img" [attr.src]="video.srcImage | secure | async">
+        <p class="descriptionprofileImageFullVideo">
+          {{ video.username }}
+        </p>
+      </div>
+      <div class="separator">Descripción</div>
+
+        <p class="description">
+          {{ video.description }}
+        </p>
+        <hr class="description-div">  
+        <p class="description">
+          {{ video.uploaded_since }}
+        </p>
+      </div>
 </div>
 
 <hr class="description-div">

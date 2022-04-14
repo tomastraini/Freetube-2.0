@@ -30,17 +30,52 @@ namespace REST.Repositories
                            where vid.id_video == id
                            select new videos() { 
                             paths = vid.paths
-                           
                            }).FirstOrDefault();
+
+            var commentsRelated = (from com in contexto.comments
+                                   where com.id_video == id
+                                   select com).ToList();
+
+            var likesRelated = (from lik in contexto.likes
+                                where lik.id_video == id
+                                select lik).ToList();
+
+            var viewedVideos = (from vw in contexto.views
+                                where vw.id_video == id
+                                select vw).ToList();
 
             var paths = destroy.paths;
             try
             {
-                File.Delete(paths);
+                if(commentsRelated != null && commentsRelated.Count() > 0)
+                {
+                    commentsRelated.ForEach(cr => { 
+                        contexto.comments.Remove(cr);
+                    });
+                    contexto.SaveChanges();
+                }
+                if (likesRelated != null && likesRelated.Count() > 0)
+                {
+                    likesRelated.ForEach(lr => { 
+                        contexto.likes.Remove(lr);
+                    });
+                    contexto.SaveChanges();
+                }
+                if(viewedVideos != null && viewedVideos.Count() > 0)
+                {
+                    viewedVideos.ForEach(vw =>{
+                        contexto.views.Remove(vw);
+                    });
+                    contexto.SaveChanges();
+                }
+
                 contexto.Videos.Remove(destroy);
+
                 contexto.SaveChanges();
+                File.Delete(paths);
                 return "Eliminación exitosa!";
-            }catch(Exception e)
+            }
+            catch(Exception e)
             {
                 return "No se ha podido eliminar!";
             }
@@ -57,7 +92,8 @@ namespace REST.Repositories
                                 id_user = vid.id_user,
                                 paths = vid.paths,
                                 title = vid.title,
-                                usern = us.usern
+                                usern = us.usern,
+                                fecha_carga = vid.fecha_carga
                             }).ToList();
             var likeTable = (from lik in contexto.likes
                              select lik);
@@ -108,7 +144,8 @@ namespace REST.Repositories
                 views = views,
                 id_user = query.id_user,
                 title = query.title,
-                usern = query.id_user.ToString()
+                usern = query.id_user.ToString(),
+                fecha_carga = query.fecha_carga,
             };
 
             return response;
@@ -128,7 +165,8 @@ namespace REST.Repositories
                     description = description,
                     paths = path,
                     title = title,
-                    id_user = id_user
+                    id_user = id_user,
+                    fecha_carga = DateTime.Now
                 });
                 contexto.SaveChanges();
                 return videos;
@@ -220,7 +258,8 @@ namespace REST.Repositories
                                 id_user = vid.id_user,
                                 paths = vid.paths,
                                 title = vid.title,
-                                usern = us.usern
+                                usern = us.usern,
+                                fecha_carga = vid.fecha_carga
                             }).ToList();
             var likeTable = (from lik in contexto.likes
                              select lik);

@@ -15,6 +15,7 @@ namespace REST.DTOs
         public long likes { get; set; }
         public long dislikes { get; set; }
         public long views { get; set; }
+        public DateTime fecha_carga { get; set; }
         public int id_user { get; set; }
     }
 }

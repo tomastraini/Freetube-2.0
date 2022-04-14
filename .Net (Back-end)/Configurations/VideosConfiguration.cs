@@ -30,6 +30,9 @@ namespace Practise.Configurations
             entity.Property(e => e.id_user)
                 .HasColumnName("id_user");
 
+            entity.Property(e => e.fecha_carga)
+                .HasColumnName("fecha_carga");
+
             OnConfigurePartial(entity);
         }
 

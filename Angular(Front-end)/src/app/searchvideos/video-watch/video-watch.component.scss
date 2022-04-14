@@ -231,11 +231,51 @@
     margin-top: 1%;
   }
 
-  .theRest
+
+
+  .theRest1
+  {
+    margin-top: -23%;
+    margin-bottom: 6.25%;
+  }
+  .theRest2
+  {
+    margin-top: -46%;
+    margin-bottom: 12.50%;
+  }
+  .theRest3
+  {
+    margin-top: -69%;
+    margin-bottom: 18.75%;
+  }
+  .theRest4
+  {
+    margin-top: -92%;
+    margin-bottom: 25%;
+  }
+  .theRest5
+  {
+    margin-top: -115%;
+    margin-bottom: 31.25%;
+  }
+  .theRest6
+  {
+    margin-top: -138%;
+    margin-bottom: 37.5%;
+  }
+
+  .theRest7
+  {
+    margin-top: -161%;
+    margin-bottom: 43.75%;
+  }
+  
+  .theRest8
   {
     margin-top: -184%;
     margin-bottom: 50%;
   }
+
 
   .commentZero
   {
@@ -313,4 +353,40 @@
 .matGrid
 {
   margin-top: 3%;
+}
+
+.profileImageFullVideo
+{
+  margin-left: 5%;
+  margin-bottom: 5%;
+}
+
+.descriptionprofileImageFullVideo
+{
+  margin-left: 10%;
+  margin-top: -6%;
+}
+
+
+.separator {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  max-width: 100%;
+  margin-left: 5%;
+}
+
+.separator::before,
+.separator::after {
+  content: '';
+  flex: 1;
+  border-bottom: 1px solid #000;
+}
+
+.separator:not(:empty)::before {
+  margin-right: .25em;
+}
+
+.separator:not(:empty)::after {
+  margin-left: .25em;
 }

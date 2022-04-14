@@ -11,9 +11,14 @@ export class TableFilterPipe implements PipeTransform {
 
       val.description.indexOf(value) !== -1 ||
 
+      val.usern.indexOf(value) !== -1 ||
+
       val.title.toLowerCase().indexOf(value.toLowerCase()) !== -1 ||
 
-      val.description.toLowerCase().indexOf(value.toLowerCase()) !== -1
+      val.description.toLowerCase().indexOf(value.toLowerCase()) !== -1 ||
+
+      val.usern.toLowerCase().indexOf(value.toLowerCase()) !== -1
+      
     ) : li;
   }
 }

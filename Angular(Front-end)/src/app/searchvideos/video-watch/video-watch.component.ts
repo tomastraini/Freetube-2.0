@@ -18,6 +18,7 @@ export class VideoWatchComponent implements OnInit {
   comments: any = [];
   liked: any;
   users: any;
+  fullVidUsername: any;
 
   videosOriginal: any;
   videos: any;
@@ -44,6 +45,46 @@ export class VideoWatchComponent implements OnInit {
       }).subscribe(res => {
           if (res){
             this.video = res;
+            const date = new Date(this.video.fecha_carga);
+            const now = new Date();
+            const diff = now.getTime() - date.getTime();
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const months = Math.floor(diff / (1000 * 60 * 60 * 24 * 30));
+            const years = Math.floor(diff / (1000 * 60 * 60 * 24 * 30 * 12));
+            if (years > 0)
+            {
+              this.video.uploaded_since = years + ' años';
+            }
+            else if (months > 0)
+            {
+              this.video.uploaded_since = months + ' meses';
+            }
+            else if (days > 0)
+            {
+              this.video.uploaded_since = days + ' días';
+            }
+            else
+            {
+              this.video.uploaded_since = 'Hace un momento';
+            }
+
+            this.video.srcImage = this.appComponent.apiUrl + 'Users/imageID/' + this.video.id_user + '/' + false;
+
+            this.http.post(this.appComponent.apiUrl + 'Users/id',
+            {
+              usern: this.video.usern
+              },
+              {
+                headers:
+                {
+                  Authorization: 'Bearer ' + sessionStorage.getItem('token')
+                }
+              }).subscribe(res => {
+                this.fullVidUsername = res;
+                this.video.username = this.fullVidUsername.usern;
+              });
+
+            console.log(this.video);
             this.src = this.appComponent.apiUrl + 'videos/watch/?id=' + this.video.id_video;
             if (sessionStorage.getItem('m') !== undefined && sessionStorage.getItem('m') !== null)
             {
@@ -124,7 +165,6 @@ export class VideoWatchComponent implements OnInit {
         {
           this.videosOriginal = Response;
           this.videos = Response;
-          console.log(this.videos);
           this.videosOriginal.forEach((value: any) =>
           {
             if (value.description == null)
@@ -139,6 +179,14 @@ export class VideoWatchComponent implements OnInit {
 
           });
         });
+      this.http.post(this.appComponent.apiUrl +
+            'videos/view?id_video=' + this.id + '&id_user=' + sessionStorage.getItem('m'),
+            null, {
+              headers: {
+                Authorization: 'Bearer ' + sessionStorage.getItem('token'),
+              }
+            }).subscribe(res => {
+            });
   }
 
   submitComment(event: any): void
@@ -174,13 +222,24 @@ export class VideoWatchComponent implements OnInit {
 
   openVid($event: any, video: any): void
   {
-    if ($event.type === 'click')
+    if ($event.type === 'auxclick')
     {
-      window.location.href = '/watch/' + video.id_video;
+      if ($event.srcElement.className.includes('vidUserIMG'))
+      {
+        window.open('/profile/' + video.id_user);
+      }
+      window.open('/watch/' + video.id_video);
     }
-    else if ($event.type === 'auxclick')
+    else
     {
-      window.open('/watch/' + video.id_video, '_blank');
+      if ($event.srcElement.className.includes('vidUserIMG'))
+      {
+        this.router.navigate(['/profile/' + video.id_user]);
+      }
+      if ($event.srcElement.className.includes('recommendedVideosViews'))
+      {
+        window.location.href = '/watch/' + video.id_video;
+      }
     }
   }
 

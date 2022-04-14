@@ -81,13 +81,26 @@ export class MenuComponent implements OnInit {
 
   openVid($event: any, video: any): void
   {
-    if ($event.type === 'click')
+    console.log($event);
+
+    if ($event.type === 'auxclick')
     {
-      window.location.href = '/watch/' + video.id_video;
+      if ($event.srcElement.className.includes('vidUserIMG'))
+      {
+        window.open('/profile/' + video.id_user);
+      }
+      window.open('/watch/' + video.id_video);
     }
-    else if ($event.type === 'auxclick')
+    else
     {
-      window.open('/watch/' + video.id_video, '_blank');
+      if ($event.srcElement.className.includes('vidUserIMG'))
+      {
+        this.router.navigate(['/profile/' + video.id_user]);
+      }
+      if ($event.srcElement.className.includes('ml-2'))
+      {
+        window.location.href = '/watch/' + video.id_video;
+      }
     }
   }
 

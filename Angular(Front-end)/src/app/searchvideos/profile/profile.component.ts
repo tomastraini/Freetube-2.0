@@ -20,12 +20,21 @@ export class ProfileComponent implements OnInit {
   videosOriginal: any;
   videos: any;
   permissionToDelete: any;
+  vidToDelete = 0;
 
   breakpoint = 6;
   length = 0;
   pageSize = 6;
   pageSizeOptions = [6];
   @Input() busquedavalue: any;
+
+  reload(): void
+  {
+    const actualroute = this.router.url;
+    this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+      this.router.navigateByUrl(actualroute);
+    });
+  }
 
   ngOnInit(): void
   {
@@ -106,5 +115,28 @@ export class ProfileComponent implements OnInit {
     {
       window.open('/watch/' + video.id_video, '_blank');
     }
+  }
+
+  selectedVideoDelete(id_video: any): void
+  {
+    this.vidToDelete = id_video;
+  }
+
+  deleteVideo(): void
+  {
+    this.http.delete(this.appComponent.apiUrl + 'videos?id=' + this.vidToDelete,
+    {
+      observe: 'response',
+      responseType: 'text',
+      headers: new HttpHeaders({
+        Authorization: 'Bearer ' + sessionStorage.getItem('token')
+      })}).subscribe(data => {
+          this.videos = this.videos.filter((video: any) => video.id_video !== this.vidToDelete);
+          this.videosOriginal = this.videosOriginal.filter((video: any) => video.id_video !== this.vidToDelete);
+          this.vidToDelete = 0;
+          window.location.reload();
+      });
+
+    window.location.reload();
   }
 }
